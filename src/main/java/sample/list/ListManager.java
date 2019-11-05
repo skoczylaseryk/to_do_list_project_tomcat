@@ -9,11 +9,11 @@ import java.util.List;
 public class ListManager {
 
     public ListOfTasks createNewTaskList(String nameOfList) throws FileNotFoundException {
-        File file1 = new File("to_do_project_list_tomcat/lists/");
+        File file1 = new File(".to_do_project_list_tomcat/lists/");
         if (!file1.exists()) {
-            new File("./lists").mkdirs();
+            new File(".to_do_project_list_tomcat/lists/").mkdirs();
         }
-        File file = new File("to_do_project_list_tomcat/lists/" + nameOfList + ".txt");
+        File file = new File(".to_do_project_list_tomcat/lists/" + nameOfList + ".txt");
         PrintWriter printWriter = new PrintWriter(file);
         ListOfTasks list = new ListOfTasks(nameOfList, file, printWriter);
         return list;
@@ -47,8 +47,8 @@ public class ListManager {
         listOfTasks.setName(newNameOfList);
         listOfTasks.getPrintWriter().close();
 
-        FileUtils.moveFile(listOfTasks.getFile(), new File("to_do_project_list_tomcat/lists/" + newNameOfList + ".txt"));
-        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter("to_do_project_list_tomcat/lists/" + newNameOfList + ".txt", true)));
+        FileUtils.moveFile(listOfTasks.getFile(), new File(".to_do_project_list_tomcat/lists/" + newNameOfList + ".txt"));
+        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter(".to_do_project_list_tomcat/lists/" + newNameOfList + ".txt", true)));
         listOfTasks.getPrintWriter().print("");
 
     }
