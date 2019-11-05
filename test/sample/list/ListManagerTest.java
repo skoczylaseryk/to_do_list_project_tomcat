@@ -158,6 +158,12 @@ class ListManagerTest {
     void editNameOfList() {
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            try {
+                listManager.editNameOfList(listOfTasks,"OtherList");
+            } catch (IOException e) {
+                e.printStackTrace();
+                fail();
+            }
             listOfTasks.setName("OtherList");
             assertEquals("OtherList", listOfTasks.getName());
         } catch (FileNotFoundException e) {
