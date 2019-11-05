@@ -1,6 +1,9 @@
 package sample.servlet;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
 import sample.user.User;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 public class HomeServlet extends HttpServlet {
     private ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();
     private ListManager lm = new ListManager();
+    private WebDriver driver = new ChromeDriver();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +41,7 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-     //   addListsTo_ListOfTaskLists();
+        //   addListsTo_ListOfTaskLists();
         try {
             for (File file : new File(req.getSession().getServletContext().getRealPath(".\\lists")).listFiles()) {
                 String fileName = file.getName();
@@ -53,36 +57,29 @@ public class HomeServlet extends HttpServlet {
         }
 
 
-
         PrintWriter printWriter = resp.getWriter();
         printWriter.println("<html>");
         printWriter.println("<body>");
-        printWriter.print("Choose your List");
+        printWriter.println("Choose your List: ");
+        printWriter.println("<br>");
 
         for (int i = 0; i < listOfTaskLists.size(); i++) {
-            printWriter.println(i + 1 + ". " + listOfTaskLists.get(i).getName());
+            String name = listOfTaskLists.get(i).getName();
+
+            if (driver.findElements(By.id(name)).isEmpty()){
+
+                printWriter.println(
+                        "<form action=/LoggedInServlet>\n" +
+                                "<input type=submit name=\"nameOfList\"" + "value=" + name + ">" + "\n" +
+                                "</form>");
+
+            }
+
         }
         printWriter.println("</body>");
         printWriter.println("</html>");
 
 
     }
-    //TODO change paths in methods in listmanager class
 
-//    private ArrayList<ListOfTasks> addListsTo_ListOfTaskLists() {
-//        try {
-//            for (File file : new File("/lists").listFiles()) {
-//                String fileName = file.getName();
-//                fileName = fileName.substring(0, fileName.length() - 4);
-//
-//                ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
-//                listOfTasks.getPrintWriter().print("");
-//                listOfTaskLists.add(listOfTasks);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return listOfTaskLists;
-//    }
 }
