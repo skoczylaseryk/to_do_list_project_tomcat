@@ -12,6 +12,7 @@ public class ListManager {
         File file1 = new File("target/to_do_project_list_tomcat/lists");
         if (!file1.exists()) {
             new File("target/to_do_project_list_tomcat/lists").mkdirs();
+
         }
         File file = new File("target/to_do_project_list_tomcat/lists/" + nameOfList + ".txt");
         PrintWriter printWriter = new PrintWriter(file);
