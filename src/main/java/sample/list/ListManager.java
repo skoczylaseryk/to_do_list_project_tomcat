@@ -5,17 +5,28 @@ import org.apache.commons.io.FileUtils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListManager {
 
+    private final static Logger LogMe = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     public ListOfTasks createNewTaskList(String nameOfList) throws FileNotFoundException {
+        LogMe.setLevel(Level.INFO);
+        LogMe.info("Starting method _createNewTaskList_");
         File file1 = new File("target/to_do_project_list_tomcat/lists/");
+
         if (!file1.exists()) {
+            LogMe.info("Creating directory, which isn't exist");
             new File("target/to_do_project_list_tomcat/lists/").mkdirs();
         }
+        LogMe.info("Creating file with _" + nameOfList + "_.txt name");
         File file = new File("target/to_do_project_list_tomcat/lists/" + nameOfList + ".txt");
+        LogMe.info("File _" + nameOfList + "_ has been created");
         PrintWriter printWriter = new PrintWriter(file);
         ListOfTasks list = new ListOfTasks(nameOfList, file, printWriter);
+
         return list;
     }
 

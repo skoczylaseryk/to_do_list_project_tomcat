@@ -16,6 +16,7 @@ public class Log {
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
         logger.setLevel(Level.INFO);
+        logFile = new FileHandler("Logging.txt");
         logger.addHandler(logFile);
     }
 }

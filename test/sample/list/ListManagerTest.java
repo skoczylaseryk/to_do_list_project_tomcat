@@ -1,6 +1,7 @@
 package sample.list;
 
 import org.junit.jupiter.api.Test;
+import sample.Log;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
 
@@ -16,6 +17,14 @@ class ListManagerTest {
 
     @Test
     void createNewTaskList_shouldReturnObjectOfListOfTasksClass() {
+
+        ListManagerTest testLogging = new ListManagerTest();
+        try {
+            Log.setup();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Problem to create log file");
+        }
 
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
