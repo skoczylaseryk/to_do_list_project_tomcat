@@ -1,9 +1,6 @@
 package sample.servlet;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
 import sample.user.User;
@@ -24,7 +21,6 @@ import java.util.ArrayList;
 public class HomeServlet extends HttpServlet {
     private ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();
     private ListManager lm = new ListManager();
-    private WebDriver driver = new ChromeDriver();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,29 +53,21 @@ public class HomeServlet extends HttpServlet {
         }
 
 
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.println("<html>");
-        printWriter.println("<body>");
-        printWriter.println("Choose your List: ");
-        printWriter.println("<br>");
-
-        for (int i = 0; i < listOfTaskLists.size(); i++) {
-            String name = listOfTaskLists.get(i).getName();
-
-            if (driver.findElements(By.id(name)).isEmpty()){
-
-                printWriter.println(
-                        "<form action=/LoggedInServlet>\n" +
-                                "<input type=submit name=\"nameOfList\"" + "value=" + name + ">" + "\n" +
-                                "</form>");
-
-            }
-
-        }
-        printWriter.println("</body>");
-        printWriter.println("</html>");
-
-
+//        PrintWriter printWriter = resp.getWriter();
+//        printWriter.println("<html>");
+//        printWriter.println("<body>");
+//        printWriter.println("Choose your List: ");
+//        printWriter.println("<br>");
+//
+//        for (int i = 0; i < listOfTaskLists.size(); i++) {
+//            String name = listOfTaskLists.get(i).getName();
+//            printWriter.println(
+//                    "<form action=/LoggedInServlet>\n" +
+//                            "<input type=submit name=\"nameOfList\"" + "value=" + name + ">" + "\n" +
+//                            "</form>");
+//        }
+//
+//        printWriter.println("</body>");
+//        printWriter.println("</html>");
     }
-
 }
