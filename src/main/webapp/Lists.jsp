@@ -42,8 +42,9 @@ Testing keys and attributes from java code-->
     for (int i = 0; i < listOfTaskLists.size(); i++) {
         String name = listOfTaskLists.get(i).getName();
 %>
-<form action=/LoggedInServlet>
+<form action=/ListOfTasksServlet>
     <input type=submit name="nameOfList" value="<%=name%>">
+    <input type=hidden name="login" value="<%=login%> ">
 </form>
 
 <%}%>
