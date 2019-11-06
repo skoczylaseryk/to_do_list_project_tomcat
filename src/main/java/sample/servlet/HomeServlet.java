@@ -11,16 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-    private ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();
-    private ListManager lm = new ListManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,37 +32,14 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        //   addListsTo_ListOfTaskLists();
-        try {
-            for (File file : new File(req.getSession().getServletContext().getRealPath(".\\lists")).listFiles()) {
-                String fileName = file.getName();
-                fileName = fileName.substring(0, fileName.length() - 4);
+        //TODO "Find how to add kyes and attributes inside code"
+        //testing setAttribute
+        //req.setAttribute("testKey", "testValue");
 
-                ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
-                listOfTasks.getPrintWriter().print("");
-                listOfTaskLists.add(listOfTasks);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //TODO "Check if user exist or not on another servlet. If not, go to SignUpServlet. If yes, go next."
 
 
-//        PrintWriter printWriter = resp.getWriter();
-//        printWriter.println("<html>");
-//        printWriter.println("<body>");
-//        printWriter.println("Choose your List: ");
-//        printWriter.println("<br>");
-//
-//        for (int i = 0; i < listOfTaskLists.size(); i++) {
-//            String name = listOfTaskLists.get(i).getName();
-//            printWriter.println(
-//                    "<form action=/LoggedInServlet>\n" +
-//                            "<input type=submit name=\"nameOfList\"" + "value=" + name + ">" + "\n" +
-//                            "</form>");
-//        }
-//
-//        printWriter.println("</body>");
-//        printWriter.println("</html>");
+        req.getRequestDispatcher("Lists.jsp").forward(req, resp);
+
     }
 }
