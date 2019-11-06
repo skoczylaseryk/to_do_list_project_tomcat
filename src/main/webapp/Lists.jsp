@@ -14,10 +14,10 @@
 <% String login = request.getParameter("login");%>
 <h1>Hello, <%=login%> *(^o^)*</h1>
 
-<!--Testing keys and attributes from java code-->
-<% String testUser = request.getParameter("user");%>
-<h1>!!!_<%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
-<!--Testing keys and attributes from java code-->
+<!--Testing keys and attributes from java code
+<//% String testUser = request.getParameter("user");%>
+<h1>!!!_<//%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
+Testing keys and attributes from java code-->
 <h2>Your task lists:</h2>
 
 <%ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();%>
