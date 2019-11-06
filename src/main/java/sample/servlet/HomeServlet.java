@@ -24,7 +24,8 @@ import java.util.ArrayList;
 public class HomeServlet extends HttpServlet {
     private ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();
     private ListManager lm = new ListManager();
-    private WebDriver driver = new ChromeDriver();
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,6 +57,8 @@ public class HomeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.setProperty("webdriver.chrome.driver",".chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
 
         PrintWriter printWriter = resp.getWriter();
         printWriter.println("<html>");
@@ -66,7 +69,7 @@ public class HomeServlet extends HttpServlet {
         for (int i = 0; i < listOfTaskLists.size(); i++) {
             String name = listOfTaskLists.get(i).getName();
 
-            if (driver.findElements(By.id(name)).isEmpty()){
+            if (!driver.findElements(By.id(name)).isEmpty()){
 
                 printWriter.println(
                         "<form action=/LoggedInServlet>\n" +
