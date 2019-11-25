@@ -31,7 +31,7 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        //TODO "Find how to add kyes and attributes inside code"
+        //TODO "Find how to add keys and attributes inside code"
         //testing setAttribute
         //req.setAttribute("testKey", "testValue");
 

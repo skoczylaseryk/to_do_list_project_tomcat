@@ -13,13 +13,7 @@ public class ListOfTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
 
-        PrintWriter writer = resp.getWriter();
-        writer.println("<html>");
-        writer.println("<body>");
-        writer.print(login);
-        writer.println("</body>");
-        writer.println("</html>");
+        req.getRequestDispatcher("Tasks.jsp").forward(req, resp);
     }
 }
