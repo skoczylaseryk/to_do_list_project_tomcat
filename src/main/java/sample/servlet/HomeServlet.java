@@ -57,8 +57,6 @@ public class HomeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.setProperty("webdriver.chrome.driver",".chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
 
         PrintWriter printWriter = resp.getWriter();
         printWriter.println("<html>");
@@ -69,16 +67,15 @@ public class HomeServlet extends HttpServlet {
         for (int i = 0; i < listOfTaskLists.size(); i++) {
             String name = listOfTaskLists.get(i).getName();
 
-            if (!driver.findElements(By.id(name)).isEmpty()){
+
 
                 printWriter.println(
-                        "<form action=/LoggedInServlet>\n" +
+                        "<form action=/LoggedInServlet id=\"" + name + "\">\n" +
                                 "<input type=submit name=\"nameOfList\"" + "value=" + name + ">" + "\n" +
                                 "</form>");
 
-            }
-
         }
+
         printWriter.println("</body>");
         printWriter.println("</html>");
 

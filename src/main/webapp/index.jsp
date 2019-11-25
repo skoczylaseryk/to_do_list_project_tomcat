@@ -9,7 +9,7 @@
 </form>
 
 <h2>Sign up</h2>
-<form action="/SignUpServlet">
+<form action="signup.jsp">
     <input type="submit" name="signUp" value="sign up"><br>
 </form>
 

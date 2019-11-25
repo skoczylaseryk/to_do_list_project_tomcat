@@ -27,7 +27,7 @@ class ListManagerTest {
         }
 
         try {
-            ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder","MyList");
             assertEquals(ListOfTasks.class, listOfTasks.getClass());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ class ListManagerTest {
     void addTaskToList_shouldReturnAddedMessage() {
 
         try {
-            ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder","MyList");
             listManager.addTaskToList(listOfTasks, "TestMessage");
             File file = listOfTasks.getFile();
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -59,7 +59,7 @@ class ListManagerTest {
     void removeTaskFromList_shouldReturnFalse_removingTaskPlacedOnTheTopOfList() {
         ListOfTasks listOfTasks = null;
         try {
-            listOfTasks = listManager.createNewTaskList("MyList");
+            listOfTasks = listManager.createNewTaskList("testFolder","MyList");
             listManager.addTaskToList(listOfTasks, "TestMessage2");
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
@@ -93,7 +93,7 @@ class ListManagerTest {
     void removeTaskFromList_shouldReturnFalse_removingTaskPlacedInTheMiddleOfList() {
 
         try {
-            ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder","MyList");
 
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
@@ -125,7 +125,7 @@ class ListManagerTest {
     void removeTaskFromList_shouldReturnFalse_removingTaskPlacedAtTheBottomOfList() {
 
         try {
-            ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder","MyList");
 
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
@@ -157,14 +157,13 @@ class ListManagerTest {
     @Test
     void editNameOfList() {
         try {
-            ListOfTasks listOfTasks = listManager.createNewTaskList("MyList");
+            ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder","MyList");
             try {
-                listManager.editNameOfList(listOfTasks,"OtherList");
+                listManager.editNameOfList("testFolder",listOfTasks,"OtherList");
             } catch (IOException e) {
                 e.printStackTrace();
                 fail();
             }
-            listOfTasks.setName("OtherList");
             assertEquals("OtherList", listOfTasks.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
