@@ -7,7 +7,7 @@ import java.io.*;
 public class UserService {
     private static String CONTEXTPATH="C:\\resources";
 
-    public static UserService USERSERVICE;
+    private static UserService USERSERVICE;
 
     private UserService() {
     }
@@ -24,6 +24,7 @@ public class UserService {
 
 
         new File(CONTEXTPATH + "/users/" + login).mkdirs();
+        new File(CONTEXTPATH + "/lists/" + login).mkdirs();
 
         PrintWriter printWriter1 = new PrintWriter(new FileWriter(new File(CONTEXTPATH + "/users/" + login + "/" + login + ".txt")));
         printWriter1.println(login);
@@ -53,5 +54,7 @@ public class UserService {
         return true;
     }
 
-
+    public String getCONTEXTPATH() {
+        return CONTEXTPATH;
+    }
 }
