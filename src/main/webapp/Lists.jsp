@@ -4,6 +4,7 @@
 <%@ page import="sample.list.ListOfTasks" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="sample.list.ListManager" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -20,7 +21,10 @@
 Testing keys and attributes from java code-->
 <h2>Your task lists:</h2>
 
-<%ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();%>
+<%
+    ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();
+    ListManager lm = new ListManager();
+%>
 
 <%
     try {
@@ -37,6 +41,17 @@ Testing keys and attributes from java code-->
         e.printStackTrace();
     }
 %>
+<form>
+    <input type="text" id="newTaskListName">
+    <input type="button" id="Add" value="Add" onclick="function addList() {
+        <%
+      String newTaskListName = request.getParameter("newTaskListName");
+      String login1 = request.getParameter("login");
+      lm.createNewTaskList(login1, newTaskListName);
+        %>
+
+            }">
+</form>
 
 <%
     for (int i = 0; i < listOfTaskLists.size(); i++) {
