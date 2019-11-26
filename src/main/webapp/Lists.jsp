@@ -4,7 +4,6 @@
 <%@ page import="sample.list.ListOfTasks" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="sample.list.ListManager" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

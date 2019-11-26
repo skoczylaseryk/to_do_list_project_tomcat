@@ -11,18 +11,20 @@ import java.util.logging.Logger;
 public class ListManager {
 
     private final static Logger LogMe = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static String CONTEXTPATH="C:\\resources";
 
-    public ListOfTasks createNewTaskList(String nameOfList) throws FileNotFoundException {
+
+    public ListOfTasks createNewTaskList(String login, String nameOfList) throws FileNotFoundException {
         LogMe.setLevel(Level.INFO);
         LogMe.info("Starting method _createNewTaskList_");
-        File file1 = new File("target/to_do_project_list_tomcat/lists/");
+        File file1 = new File(CONTEXTPATH+"/lists/" + login + "/");
 
         if (!file1.exists()) {
             LogMe.info("Creating directory, which isn't exist");
-            new File("target/to_do_project_list_tomcat/lists/").mkdirs();
+            new File(CONTEXTPATH + "/lists/" + login + "/").mkdirs();
         }
         LogMe.info("Creating file with _" + nameOfList + "_.txt name");
-        File file = new File("target/to_do_project_list_tomcat/lists/" + nameOfList + ".txt");
+        File file = new File(CONTEXTPATH + "/lists/" + login + "/" + nameOfList + ".txt");
         LogMe.info("File _" + nameOfList + "_ has been created");
         PrintWriter printWriter = new PrintWriter(file);
         ListOfTasks list = new ListOfTasks(nameOfList, file, printWriter);
@@ -54,12 +56,12 @@ public class ListManager {
     }
 
 
-    public void editNameOfList(ListOfTasks listOfTasks, String newNameOfList) throws IOException {
+    public void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException {
         listOfTasks.setName(newNameOfList);
         listOfTasks.getPrintWriter().close();
 
-        FileUtils.moveFile(listOfTasks.getFile(), new File("target/to_do_project_list_tomcat/lists/" + newNameOfList + ".txt"));
-        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter("target/to_do_project_list_tomcat/lists/" + newNameOfList + ".txt", true)));
+        FileUtils.moveFile(listOfTasks.getFile(), new File( CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt"));
+        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter( CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
         listOfTasks.getPrintWriter().print("");
 
     }
@@ -75,8 +77,8 @@ public class ListManager {
         List<String> upperSubList = new ArrayList<>();
         String currentLine;
         while (!(currentLine = bufferedReader.readLine()).equals(task)) {
-                upperSubList.add(currentLine);
-            }
+            upperSubList.add(currentLine);
+        }
 
         return upperSubList;
     }
