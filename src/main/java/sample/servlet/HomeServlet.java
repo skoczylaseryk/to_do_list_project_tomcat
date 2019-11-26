@@ -1,8 +1,5 @@
 package sample.servlet;
 
-
-import sample.list.ListManager;
-import sample.list.ListOfTasks;
 import sample.user.User;
 
 import javax.servlet.ServletException;
@@ -15,7 +12,6 @@ import java.io.IOException;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,12 +28,11 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        //TODO "Find how to add kyes and attributes inside code"
+        //TODO "Find how to add keys and attributes inside code"
         //testing setAttribute
         //req.setAttribute("testKey", "testValue");
 
-        //TODO "Check if user exist or not on another servlet. If not, go to SignUpServlet. If yes, go next."
-
+        //TODO "Check if user exist or not on another servlet. If not, go to SignUpServlet. If yes, go next.
 
         req.getRequestDispatcher("Lists.jsp").forward(req, resp);
 
