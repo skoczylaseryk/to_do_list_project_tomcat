@@ -1,0 +1,44 @@
+body {
+    background-color: #2F3336;
+    color: #efefef;
+
+}
+.container
+{
+    text-align: center;
+
+}
+
+#login{
+
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+#password{
+
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+#signuplogin{
+    margin-top: 50px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+#signuppassword{
+    padding: 10px;
+    margin-bottom: 5px;
+
+}
+
+#header{
+    margin-top: 100px;
+}
+
+#incLogOrPass{
+    color: red;
+}
+
+

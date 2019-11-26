@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = "/HomeServlet")
@@ -29,7 +30,11 @@ public class VerificationFilter implements Filter {
         if (userService.verifyLoginData(login, password)){
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-            response.sendRedirect("index.jsp");
+            request.setAttribute("wrongCredentials","true");
+            //HttpSession httpSession = request.getSession();
+            //httpSession.setAttribute("wrongCredentials","true");
+            System.out.println(request.getAttribute("wrongCredentials"));
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         }
     }
 
