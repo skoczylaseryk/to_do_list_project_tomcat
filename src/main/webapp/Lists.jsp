@@ -22,46 +22,50 @@
 </head>
 <body>
 <div class="container">
-    <% String login = request.getParameter("login");%>
-    <h1>Hello, <%=login%> *(^o^)*</h1>
+<% String login = request.getParameter("login");%>
+<h1>Hello, <%=login%> *(^o^)*</h1>
+<!--Testing keys and attributes from java code
+<//% String testUser = request.getParameter("user");%>
+<h1>!!!_<//%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
+Testing keys and attributes from java code-->
+<form action="/AddListServlet" method="post" >
+    <h1></h1>
+    <input type="text" name="newTaskListName">
+    <input type="submit" name="Add" value="Add">
+    <input type="hidden" name="login" value="<%=login%>">
+</form>
 
-    <!--Testing keys and attributes from java code
-    <//% String testUser = request.getParameter("user");%>
-    <h1>!!!_<//%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
-    Testing keys and attributes from java code-->
-    <h2>Your task lists:</h2>
+<h2>Your task lists:</h2>
+<% ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>(); %>
+<% UserService userService = UserService.getInstance(); %>
 
-    <%  ArrayList<ListOfTasks> listOfTaskLists = new ArrayList<>();%>
-    <%  UserService userService = UserService.getInstance(); %>
-
-    <%
-        try {
+<%
+    try {
 
 
 
-            for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login ).listFiles()) {
-                String fileName = file.getName();
-                fileName = fileName.substring(0, fileName.length() - 4);
+        for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login ).listFiles()) {
+            String fileName = file.getName();
+            fileName = fileName.substring(0, fileName.length() - 4);
 
-                ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
-                listOfTasks.getPrintWriter().print("");
-                listOfTaskLists.add(listOfTasks);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
+            listOfTasks.getPrintWriter().print("");
+            listOfTaskLists.add(listOfTasks);
         }
-    %>
 
-    <%
-        for (int i = 0; i < listOfTaskLists.size(); i++) {
-            String name = listOfTaskLists.get(i).getName();
-    %>
-    <form action=/ListOfTasksServlet>
-        <input type=submit name="nameOfList" value="<%=name%>">
-        <input type=hidden name="login" value="<%=login%> ">
-    </form>
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+%>
 
+<%
+    for (int i = 0; i < listOfTaskLists.size(); i++) {
+        String name = listOfTaskLists.get(i).getName();
+%>
+<form action=/ListOfTasksServlet>
+    <input type=submit name="nameOfList" value="<%=name%>">
+    <input type=hidden name="login" value="<%=login%> ">
+</form>
     <%}%>
 </div>
 
