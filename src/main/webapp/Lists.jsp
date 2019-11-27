@@ -19,10 +19,11 @@
 <//% String testUser = request.getParameter("user");%>
 <h1>!!!_<//%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
 Testing keys and attributes from java code-->
-<form action="/AddListServlet" method="post" >
+
+<form action="/AddListServlet" method="post">
     <h1></h1>
     <input type="text" name="newTaskListName">
-    <input type="submit" name="Add" value="Add">
+    <input type="submit" name="Add" value="Add new list">
     <input type="hidden" name="login" value="<%=login%>">
 </form>
 
@@ -44,17 +45,19 @@ Testing keys and attributes from java code-->
     }
 %>
 
-<%
-    for (int i = 0; i < listOfTaskLists.size(); i++) {
-        String name = listOfTaskLists.get(i).getName();
-%>
-<form action=/ListOfTasksServlet>
-    <input type=submit name="nameOfList" value="<%=name%>">
-    <input type=hidden name="login" value="<%=login%> ">
-</form>
-<%}%>
-<script type="text/javascript">
 
-</script>
+<form action=/ListOfTasksServlet>
+    <%
+        for (int i = 0; i < listOfTaskLists.size(); i++) {
+            String name = listOfTaskLists.get(i).getName();
+    %>
+    <table>
+        <input type=submit name="nameOfList" value="<%=name%>">
+        <input type=hidden name="login" value="<%=login%>">
+    </table>
+    <br>
+    <%}%>
+</form>
+
 </body>
 </html>
