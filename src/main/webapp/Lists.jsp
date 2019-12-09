@@ -4,9 +4,7 @@
 <%@ page import="sample.list.ListOfTasks" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="sample.user.User" %>
 <%@ page import="sample.list.UserService" %>
-<%@ page import="sample.list.ListManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,10 +13,6 @@
 <body>
 <% String login = request.getParameter("login");%>
 <h1>Hello, <%=login%> *(^o^)*</h1>
-<!--Testing keys and attributes from java code
-<//% String testUser = request.getParameter("user");%>
-<h1>!!!_<//%=testUser%>_!!! <- If "testValue" is inside, setAttribute works fine</h1>
-Testing keys and attributes from java code-->
 
 <form action="/AddListServlet" method="post">
     <h1></h1>

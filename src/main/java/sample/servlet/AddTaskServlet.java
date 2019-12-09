@@ -37,7 +37,7 @@ public class AddTaskServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.setAttribute("nameOfList", listName); //TODO whe nameoflist is null after adding task
+        request.setAttribute("nameOfList", listName); //TODO when nameoflist is null after adding task
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }
 
