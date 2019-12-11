@@ -46,7 +46,7 @@
             String name = listOfTaskLists.get(i).getName();
     %>
     <table>
-        <input type=submit name="nameOfList" value="<%=name%>">
+        <input type=submit name="listName" value="<%=name%>">
         <input type=hidden name="login" value="<%=login%>">
     </table>
     <br>

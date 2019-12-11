@@ -9,10 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/AddTaskServlet")
 public class AddTaskServlet extends HttpServlet {
@@ -21,6 +20,7 @@ public class AddTaskServlet extends HttpServlet {
         String listName = request.getParameter("listName");
         String login = request.getParameter("login");
         UserService userService = UserService.getInstance();
+        List<String> listOfTasksNames = new ArrayList<>();
         ListManager lm = new ListManager();
 
         try {
@@ -30,6 +30,16 @@ public class AddTaskServlet extends HttpServlet {
                 if (fileName.equals(listName)) {
                     ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
                     lm.addTaskToList(listOfTasks, newTaskName);
+
+                    String line = null;
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
+                    do {
+                        line = bufferedReader.readLine();
+                        listOfTasksNames.add(line);
+
+                    } while (line != null);
+                    bufferedReader.close();
+                    listOfTasksNames.remove(listOfTasksNames.size() - 1); //because bufferedReader adds last line as null
                     break; //May creates errors
                 }
             }
@@ -37,7 +47,8 @@ public class AddTaskServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.setAttribute("nameOfList", listName); //TODO when nameoflist is null after adding task
+        request.setAttribute("listOfTasksNames", listOfTasksNames);
+        request.setAttribute("listName", listName); //TODO when nameOfList is null after adding task
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }
 

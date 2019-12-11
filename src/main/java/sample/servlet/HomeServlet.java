@@ -28,13 +28,7 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        //TODO "Find how to add keys and attributes inside code"
-        //testing setAttribute
-        //req.setAttribute("testKey", "testValue");
-
-        //TODO "Check if user exist or not on another servlet. If not, go to SignUpServlet. If yes, go next.
 
         req.getRequestDispatcher("Lists.jsp").forward(req, resp);
-
     }
 }

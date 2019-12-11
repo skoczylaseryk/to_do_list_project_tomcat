@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<% String listName = request.getParameter("nameOfList");%>
+<% String listName = request.getParameter("listName");%>
 <% String login = request.getParameter("login");%>
 <h1>List: <%=listName%></h1>
 
@@ -16,7 +16,7 @@
     <input type="hidden" name="listName" value="<%=listName%>">
     <input type="hidden" name="login" value="<%=login%>">
 </form>
-
+<!-- TODO add method to read if task are done or not (states 'done' and 'todo') -->
 <script type="text/javascript">
 
     //create variables
