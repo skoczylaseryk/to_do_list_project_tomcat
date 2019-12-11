@@ -13,15 +13,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/ListOfTasksServlet")
-public class ListOfTasksServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String listName = req.getParameter("listName");
+@WebServlet("/AddTaskServlet")
+public class AddTaskServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String newTaskName = request.getParameter("newTaskName");
+        String listName = request.getParameter("listName");
+        String login = request.getParameter("login");
         UserService userService = UserService.getInstance();
         List<String> listOfTasksNames = new ArrayList<>();
+        ListManager lm = new ListManager();
 
         try {
             for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
@@ -29,6 +29,8 @@ public class ListOfTasksServlet extends HttpServlet {
                 fileName = fileName.substring(0, fileName.length() - 4);
                 if (fileName.equals(listName)) {
                     ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
+                    lm.addTaskToList(listOfTasks, newTaskName);
+
                     String line = null;
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
                     do {
@@ -38,7 +40,6 @@ public class ListOfTasksServlet extends HttpServlet {
                     } while (line != null);
                     bufferedReader.close();
                     listOfTasksNames.remove(listOfTasksNames.size() - 1); //because bufferedReader adds last line as null
-
                     break; //May creates errors
                 }
             }
@@ -46,8 +47,12 @@ public class ListOfTasksServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        req.setAttribute("listName", listName);
-        req.setAttribute("listOfTasksNames", listOfTasksNames);
-        req.getRequestDispatcher("Tasks.jsp").forward(req, resp);
+        request.setAttribute("listOfTasksNames", listOfTasksNames);
+        request.setAttribute("listName", listName); //TODO when nameOfList is null after adding task
+        request.getRequestDispatcher("Tasks.jsp").forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
