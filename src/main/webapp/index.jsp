@@ -17,7 +17,7 @@
         <%if(request.getAttribute("wrongCredentials")== "true"){ %>
            <h5 id="incLogOrPass">Incorrect login or password</h5>
        <%}%>
-        <form action="/HomeServlet">
+        <form action="/HomeServlet" method="post">
             <input type="text" id="login" name="login" placeholder="Login"><br>
             <input type="password" id="password"name="password" placeholder="Password"><br>
             <input type="submit" name="login" value="log in">

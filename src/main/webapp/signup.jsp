@@ -1,4 +1,4 @@
-<%@ page import="sample.list.UserService" %><%--
+<%@ page import="sample.services.UserService" %><%--
   Created by IntelliJ IDEA.
   User: Eryk
   Date: 19.11.2019
@@ -22,6 +22,12 @@
 <div class="container">
 
     <h2 id="header">Input login and password</h2>
+    <% if(request.getAttribute("verifyResult")=="0"){ %>
+    <h5 id="incLogOrPass">This login is already use</h5>
+    <%}else if(request.getAttribute("verifyResult")=="1"){%>
+    <h5 id="incLogOrPass">You cannot use special characters like:!,@,#,$,%,^,&,*,(,),?,:,;,',",>,<,",",".",{,},[,],\,|,/</h5>
+    <%}%>
+
 
 <form action="SignUpServlet">
     <input type="text" id="signuplogin" name="login" placeholder="login"><br>

@@ -3,6 +3,7 @@ package sample.servlet;
 
 
 
+import sample.services.FileService;
 import sample.user.User;
 
 import javax.servlet.ServletException;
@@ -11,30 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
+    FileService fileService = FileService.getInstance();
+
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String parameter1 = req.getParameter("login");
-        String parameter2 = req.getParameter("password");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
 
         HttpSession session = req.getSession(true);
         User user = (User) session.getAttribute("user");
         if (user == null || user.getLogin() == null || user.getPassword() == null) {
             user = new User();
-            user.setLogin(parameter1);
-            user.setPassword(parameter2);
+            user.setLogin(login);
+            user.setPassword(password);
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(3600);
 
         }
+        int newListNumber=fileService.getLastNumberOfFile(req,login);
+        req.setAttribute("newListNumber",newListNumber);
 
 
         req.getRequestDispatcher("Lists.jsp").forward(req,resp);

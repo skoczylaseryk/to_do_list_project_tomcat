@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 public class ListManager {
 
     private final static Logger LogMe = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static String CONTEXTPATH="C:\\resources";
+    private static String CONTEXTPATH = "C:\\resources";
 
 
     public ListOfTasks createNewTaskList(String login, String nameOfList) throws FileNotFoundException {
         LogMe.setLevel(Level.INFO);
         LogMe.info("Starting method _createNewTaskList_");
-        File file1 = new File(CONTEXTPATH+"/lists/" + login + "/");
+        File file1 = new File(CONTEXTPATH + "/lists/" + login + "/");
 
         if (!file1.exists()) {
             LogMe.info("Creating directory, which isn't exist");
@@ -28,7 +28,6 @@ public class ListManager {
         LogMe.info("File _" + nameOfList + "_ has been created");
         PrintWriter printWriter = new PrintWriter(file);
         ListOfTasks list = new ListOfTasks(nameOfList, file, printWriter);
-
         return list;
     }
 
@@ -55,13 +54,19 @@ public class ListManager {
 
     }
 
+    public boolean removeList(ListOfTasks listOfTasks, String login) {
+
+        File file = new File(CONTEXTPATH + "\\lists\\" + login + "\\" + listOfTasks.getName() + ".txt");
+        return file.delete();
+    }
+
 
     public void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException {
         listOfTasks.setName(newNameOfList);
         listOfTasks.getPrintWriter().close();
 
-        FileUtils.moveFile(listOfTasks.getFile(), new File( CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt"));
-        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter( CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
+        FileUtils.moveFile(listOfTasks.getFile(), new File(CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt"));
+        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter(CONTEXTPATH + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
         listOfTasks.getPrintWriter().print("");
 
     }

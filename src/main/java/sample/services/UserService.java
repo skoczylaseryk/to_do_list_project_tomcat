@@ -1,4 +1,4 @@
-package sample.list;
+package sample.services;
 
 
 
@@ -52,6 +52,39 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+
+    public int verifySignUpData(String login){
+        UserService userService = UserService.getInstance();
+        for (File file : new File(userService.getCONTEXTPATH() + "/users/" ).listFiles()){
+            String fileName = file.getName();
+            if(fileName.equals(login)) {
+                System.out.println("This login is already used");
+                return 0;
+            }
+           if(!checkIllegalCharacters(login)){
+                System.out.println("Login cannot contain specjal characters");
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    private boolean checkIllegalCharacters(String login){
+        boolean result=true;
+
+        String[] arrayOfCharacters = {"\\", "/", ":",";","\'","[","{","}","]",",",".","+","=","-","_", "*", "?", "\""," ", "<", ">", "|", "!", "@", "#", "$", "%", "^", "&", "(", ")"};
+        for(String z : arrayOfCharacters){
+            if (login.contains(z)){
+                result=false;
+            }
+            if(result==false){
+                break;
+            }
+        }
+
+        return result;
     }
 
     public String getCONTEXTPATH() {
