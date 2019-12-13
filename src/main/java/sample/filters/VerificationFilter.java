@@ -1,6 +1,7 @@
 package sample.filters;
 
 import sample.services.UserService;
+import sample.services.impl.UserServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/HomeServlet")
 public class VerificationFilter implements Filter {
-    UserService userService = UserService.getInstance();
+    UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -1,9 +1,10 @@
-package sample.list;
+package sample.list.impl;
 
 import org.junit.jupiter.api.Test;
 import sample.Log;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
+import sample.list.impl.ListManagerImpl;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,14 +12,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ListManagerTest {
+class listManagerTest {
 
-    ListManager listManager = new ListManager();
+    ListManager listManager = ListManagerImpl.getInstance();
 
     @Test
     void createNewTaskList_shouldReturnObjectOfListOfTasksClass() {
 
-        ListManagerTest testLogging = new ListManagerTest();
         try {
             Log.setup();
         } catch (IOException e) {
@@ -57,7 +57,7 @@ class ListManagerTest {
 
     @Test
     void removeTaskFromList_shouldReturnFalse_removingTaskPlacedOnTheTopOfList() {
-        ListOfTasks listOfTasks = null;
+        ListOfTasks listOfTasks;
         try {
             listOfTasks = listManager.createNewTaskList("testFolder", "MyList");
             listManager.addTaskToList(listOfTasks, "TestMessage2");
@@ -165,8 +165,8 @@ class ListManagerTest {
             fail();
         }
         listOfTasks.getPrintWriter().close();
-          boolean result =  listManager.removeList(listOfTasks, "testFolder");
-            assertEquals(true, result);
+        boolean result =  listManager.removeList(listOfTasks, "testFolder");
+        assertEquals(true, result);
 
 
 
@@ -177,7 +177,7 @@ class ListManagerTest {
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder", "MyList");
             try {
-                listManager.editNameOfList("testFolder", listOfTasks, "OtherList");
+                listManager.editNameOfList("testFolder", listOfTasks, "OtherList1");
             } catch (IOException e) {
                 e.printStackTrace();
                 fail();

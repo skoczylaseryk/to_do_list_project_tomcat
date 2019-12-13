@@ -4,6 +4,7 @@ package sample.servlet;
 
 
 import sample.services.FileService;
+import sample.services.impl.FileServiceImpl;
 import sample.user.User;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-    FileService fileService = FileService.getInstance();
+    FileService fileService = FileServiceImpl.getInstance();
 
 
     @Override
@@ -34,7 +35,7 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        int newListNumber=fileService.getLastNumberOfFile(req,login);
+        int newListNumber= fileService.getLastNumberOfFile(req,login);
         req.setAttribute("newListNumber",newListNumber);
 
 

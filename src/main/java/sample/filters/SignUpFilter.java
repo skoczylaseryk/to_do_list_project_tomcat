@@ -1,6 +1,7 @@
 package sample.filters;
 
 import sample.services.UserService;
+import sample.services.impl.UserServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/SignUpServlet")
 public class SignUpFilter implements Filter {
-    private UserService userService = UserService.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -31,7 +32,6 @@ public class SignUpFilter implements Filter {
             request.setAttribute("verifyResult","1");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }else if(verifyResult==2) {
-//            request.setAttribute("verifyResult", "2");
             filterChain.doFilter(request,response);
         }
 

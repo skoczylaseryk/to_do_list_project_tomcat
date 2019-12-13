@@ -1,4 +1,4 @@
-<%@ page import="sample.services.UserService" %><%--
+<%@ page import="sample.services.impl.UserServiceImpl" %><%--
   Created by IntelliJ IDEA.
   User: Eryk
   Date: 19.11.2019

@@ -1,7 +1,9 @@
 package sample.servlet;
 
-import sample.services.FileService;
 import sample.list.ListManager;
+import sample.list.impl.ListManagerImpl;
+import sample.services.FileService;
+import sample.services.impl.FileServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,8 @@ import java.io.IOException;
 public class AddListServlet extends HttpServlet {
     private String defaultName = "NewList";
     private int numberOfFile;
-    FileService fileService = FileService.getInstance();
-    ListManager lm = new ListManager();
+    FileService fileService = FileServiceImpl.getInstance();
+    ListManager lm = ListManagerImpl.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String newTaskListName = request.getParameter("newTaskListName");
@@ -30,10 +32,6 @@ public class AddListServlet extends HttpServlet {
             lm.createNewTaskList(login, newTaskListName);
         }
         request.getRequestDispatcher("Lists.jsp").forward(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
 

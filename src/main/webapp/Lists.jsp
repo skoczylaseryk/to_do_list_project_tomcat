@@ -4,7 +4,7 @@
 <%@ page import="sample.list.ListOfTasks" %>
 <%@ page import="java.io.File" %>
 <%@ page import="sample.user.User" %>
-<%@ page import="sample.services.UserService" %>
+<%@ page import="sample.services.impl.UserServiceImpl" %>
 <%@ page import="java.nio.file.attribute.BasicFileAttributes" %>
 <%@ page import="java.nio.file.Files" %>
 <%@ page import="java.nio.file.Paths" %>
@@ -42,15 +42,17 @@
     </form>
 
     <h2>Your task lists:</h2>
-    <% UserService userService = UserService.getInstance(); %>
+    <% UserServiceImpl userServiceImpl = UserServiceImpl.getInstance(); %>
 
     <%
 
-            File[] files = new File(userService.getCONTEXTPATH() + "/lists/" + login).listFiles();
-            Arrays.sort(files, new FileComparator());
-            System.out.println(Arrays.toString(files));
+        File[] files = new File(userServiceImpl.getCONTEXTPATH() + "/lists/" + login).listFiles();
+        Arrays.sort(files, new FileComparator());
+        System.out.println(Arrays.toString(files));
 
-
+    %>
+    <form action=/ListOfTasksServlet>
+        <%
             for (int i = 0; i < files.length; i++) {
 
 
@@ -58,14 +60,17 @@
                 System.out.println(fileName);
                 String name = fileName.substring(0, fileName.length() - 4);
 
-                %>
+        %>
+        <table>
 
- <form action=/ListOfTasksServlet>
         <input type=submit name="nameOfList" value="<%=name%>">
-    <input type=hidden name="login" value="<%=login%> ">
+        <input type=hidden name="login" value="<%=login%>">
+        </table>
+        <br>
+
+    <%}%>
     </form>
 
-            <%}%>
 </div>
 
 </body>
