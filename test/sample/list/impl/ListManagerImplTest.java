@@ -1,5 +1,9 @@
 package sample.list.impl;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import sample.Log;
 import sample.list.ListManager;
@@ -7,6 +11,9 @@ import sample.list.ListOfTasks;
 import sample.list.impl.ListManagerImpl;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +22,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class listManagerTest {
 
     ListManager listManager = ListManagerImpl.getInstance();
+    Path path = Paths.get("C:\\resources\\lists\\testFolder");
+
+    @AfterEach
+    void deleteDirectory() {
+        File file = new File("C:\\resources\\lists\\testFolder");
+        file.mkdirs();
+        file.list();
+        String[] files = file.list();
+        for (String file1 : files) {
+            File file3 = new File(file.getPath(),file1);
+            System.out.println(file3.delete());
+            
+        }
+        try {
+            FileUtils.deleteDirectory(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("niedziala");
+        }
+
+
+//        System.out.println(file.delete());
+    }
+
 
     @Test
     void createNewTaskList_shouldReturnObjectOfListOfTasksClass() {
@@ -25,17 +56,16 @@ class listManagerTest {
             e.printStackTrace();
             throw new RuntimeException("Problem to create log file");
         }
-
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder", "MyList");
+            listOfTasks.getPrintWriter().close();
             assertEquals(ListOfTasks.class, listOfTasks.getClass());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             fail("Incorrect path to file");
+
         }
-
     }
-
     @Test
     void addTaskToList_shouldReturnAddedMessage() {
 
@@ -165,9 +195,8 @@ class listManagerTest {
             fail();
         }
         listOfTasks.getPrintWriter().close();
-        boolean result =  listManager.removeList(listOfTasks, "testFolder");
+        boolean result = listManager.removeList(listOfTasks, "testFolder6");
         assertEquals(true, result);
-
 
 
     }
@@ -177,12 +206,12 @@ class listManagerTest {
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder", "MyList");
             try {
-                listManager.editNameOfList("testFolder", listOfTasks, "OtherList1");
+                listManager.editNameOfList("testFolder", listOfTasks, "OtherList10");
             } catch (IOException e) {
                 e.printStackTrace();
                 fail();
             }
-            assertEquals("OtherList", listOfTasks.getName());
+            assertEquals("OtherList10", listOfTasks.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

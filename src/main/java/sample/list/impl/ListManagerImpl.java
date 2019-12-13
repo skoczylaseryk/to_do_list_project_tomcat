@@ -92,6 +92,7 @@ public class ListManagerImpl implements ListManager {
             fileName = fileName.substring(0, fileName.length() - 4);
             if (fileName.equals(nameOfList)) {
                 ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
+                 new ListManagerImpl().addTaskToList(listOfTasks, newTaskName);
                 return listOfTasks;
             }
         }
