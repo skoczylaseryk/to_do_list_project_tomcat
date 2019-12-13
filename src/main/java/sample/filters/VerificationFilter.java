@@ -1,6 +1,7 @@
 package sample.filters;
 
-import sample.list.UserService;
+import sample.services.UserService;
+import sample.services.impl.UserServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/HomeServlet")
 public class VerificationFilter implements Filter {
-    UserService userService = UserService.getInstance();
+    UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,7 +30,11 @@ public class VerificationFilter implements Filter {
         if (userService.verifyLoginData(login, password)){
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-            response.sendRedirect("index.jsp");
+            request.setAttribute("wrongCredentials","true");
+            //HttpSession httpSession = request.getSession();                   //sprawdzic atrybuty dla sesji
+            //httpSession.setAttribute("wrongCredentials","true");
+            System.out.println(request.getAttribute("wrongCredentials"));
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         }
     }
 

@@ -1,20 +1,22 @@
-package sample.list;
+package sample.services.impl;
 
 
+
+import sample.services.UserService;
 
 import java.io.*;
 
-public class UserService {
+public class UserServiceImpl implements UserService {
     private static String CONTEXTPATH="C:\\resources";
 
-    private static UserService USERSERVICE;
+    private static UserServiceImpl USERSERVICE;
 
-    private UserService() {
+    private UserServiceImpl() {
     }
 
-    public static UserService getInstance(){
+    public static UserServiceImpl getInstance(){
         if(USERSERVICE ==null){
-            USERSERVICE= new UserService();
+            USERSERVICE= new UserServiceImpl();
         }
         return USERSERVICE;
     }
@@ -52,6 +54,39 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+
+    public int verifySignUpData(String login){
+        UserServiceImpl userServiceImpl = UserServiceImpl.getInstance();
+        for (File file : new File(userServiceImpl.getCONTEXTPATH() + "/users/" ).listFiles()){
+            String fileName = file.getName();
+            if(fileName.equals(login)) {
+                System.out.println("This login is already used");
+                return 0;
+            }
+           if(!checkIllegalCharacters(login)){
+                System.out.println("Login cannot contain specjal characters");
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    private boolean checkIllegalCharacters(String login){
+        boolean result=true;
+
+        String[] arrayOfCharacters = {"\\", "/", ":",";","\'","[","{","}","]",",",".","+","=","-","_", "*", "?", "\""," ", "<", ">", "|", "!", "@", "#", "$", "%", "^", "&", "(", ")"};
+        for(String z : arrayOfCharacters){
+            if (login.contains(z)){
+                result=false;
+            }
+            if(result==false){
+                break;
+            }
+        }
+
+        return result;
     }
 
     public String getCONTEXTPATH() {

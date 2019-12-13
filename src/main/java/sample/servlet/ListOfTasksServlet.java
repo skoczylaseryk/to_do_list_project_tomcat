@@ -1,8 +1,8 @@
 package sample.servlet;
 
-import sample.list.ListManager;
 import sample.list.ListOfTasks;
-import sample.list.UserService;
+import sample.services.UserService;
+import sample.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ public class ListOfTasksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String nameOfList = req.getParameter("nameOfList");
-        UserService userService = UserService.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
         List<String> listOfTasksNames = new ArrayList<>();
 
         try {
@@ -29,7 +29,7 @@ public class ListOfTasksServlet extends HttpServlet {
                 fileName = fileName.substring(0, fileName.length() - 4);
                 if (fileName.equals(nameOfList)) {
                     ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
-                    String line = null;
+                    String line=null;
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
                     do {
                         line = bufferedReader.readLine();
