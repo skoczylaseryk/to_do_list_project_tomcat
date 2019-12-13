@@ -16,7 +16,7 @@
 
 <form action="/AddListServlet" method="post">
     <h1></h1>
-    <input type="text" name="newTaskListName">
+    <input type="text" name="newTasknameOfList">
     <input type="submit" name="Add" value="Add new list">
     <input type="hidden" name="login" value="<%=login%>">
 </form>
@@ -46,7 +46,7 @@
             String name = listOfTaskLists.get(i).getName();
     %>
     <table>
-        <input type=submit name="listName" value="<%=name%>">
+        <input type=submit name="nameOfList" value="<%=name%>">
         <input type=hidden name="login" value="<%=login%>">
     </table>
     <br>

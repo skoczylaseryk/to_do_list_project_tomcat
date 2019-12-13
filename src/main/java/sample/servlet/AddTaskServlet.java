@@ -17,7 +17,7 @@ import java.util.List;
 public class AddTaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String newTaskName = request.getParameter("newTaskName");
-        String listName = request.getParameter("listName");
+        String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
         UserService userService = UserService.getInstance();
         List<String> listOfTasksNames = new ArrayList<>();
@@ -27,7 +27,7 @@ public class AddTaskServlet extends HttpServlet {
             for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
                 String fileName = file.getName();
                 fileName = fileName.substring(0, fileName.length() - 4);
-                if (fileName.equals(listName)) {
+                if (fileName.equals(nameOfList)) {
                     ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
                     lm.addTaskToList(listOfTasks, newTaskName);
 
@@ -48,7 +48,7 @@ public class AddTaskServlet extends HttpServlet {
         }
 
         request.setAttribute("listOfTasksNames", listOfTasksNames);
-        request.setAttribute("listName", listName); //TODO when nameOfList is null after adding task
+        request.setAttribute("nameOfList", nameOfList);
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }
 

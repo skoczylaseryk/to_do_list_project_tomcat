@@ -19,7 +19,7 @@ public class ListOfTasksServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        String listName = req.getParameter("listName");
+        String nameOfList = req.getParameter("nameOfList");
         UserService userService = UserService.getInstance();
         List<String> listOfTasksNames = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class ListOfTasksServlet extends HttpServlet {
             for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
                 String fileName = file.getName();
                 fileName = fileName.substring(0, fileName.length() - 4);
-                if (fileName.equals(listName)) {
+                if (fileName.equals(nameOfList)) {
                     ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
                     String line = null;
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
@@ -46,7 +46,7 @@ public class ListOfTasksServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        req.setAttribute("listName", listName);
+        req.setAttribute("nameOfList", nameOfList);
         req.setAttribute("listOfTasksNames", listOfTasksNames);
         req.getRequestDispatcher("Tasks.jsp").forward(req, resp);
     }
