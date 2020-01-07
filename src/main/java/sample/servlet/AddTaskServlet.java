@@ -25,13 +25,15 @@ public class AddTaskServlet extends HttpServlet {
         String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
 
-         listOfTasks = lm.findList(nameOfList, login, newTaskName);
+        listOfTasks = lm.findList(nameOfList, login);
+
+        lm.addTaskToList(listOfTasks, newTaskName);
 
         List<String> listOfTasksNames = lm.getTasks(listOfTasks);
 
 
         request.setAttribute("listOfTasksNames", listOfTasksNames);
-        request.setAttribute("nameOfList", nameOfList); //TODO when nameOfList is null after adding task
+        request.setAttribute("nameOfList", nameOfList);
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }
 }
