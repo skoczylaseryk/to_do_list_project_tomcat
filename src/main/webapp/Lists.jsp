@@ -51,7 +51,7 @@
         System.out.println(Arrays.toString(files));
 
     %>
-    <form action=/ListOfTasksServlet>
+    <form action=/ListOfTasksServlet method="post">
         <%
             for (int i = 0; i < files.length; i++) {
 

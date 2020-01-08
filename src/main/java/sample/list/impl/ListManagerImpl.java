@@ -86,7 +86,7 @@ public class ListManagerImpl implements ListManager {
     }
 
     @Override
-    public ListOfTasks findList(String nameOfList, String login,String newTaskName) throws IOException {                  //Todo finish this method and in ADDTaskservlet also
+    public ListOfTasks findList(String nameOfList, String login) throws IOException {                  //Todo finish this method and in ADDTaskservlet also
         for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
             String fileName = file.getName();
             fileName = fileName.substring(0, fileName.length() - 4);
