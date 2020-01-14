@@ -55,7 +55,7 @@ public class ListManagerImpl implements ListManager {
 
     }
 
-    public void removeTaskFromList(ListOfTasks listOfTasks, String task) throws IOException {
+    public void removeTaskFromListByName(ListOfTasks listOfTasks, String task) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
 
         List<String> upperSubList = addToUpperList(bufferedReader, task);
@@ -66,6 +66,25 @@ public class ListManagerImpl implements ListManager {
 
         writeWholeListToTxtFile(mainList, printWriter);
 
+    }
+
+    @Override
+    public String findTaskByRowNumber(ListOfTasks listOfTasks, int rowNumber) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
+        int temp=0;
+
+        List<String> strings = new ArrayList<>();
+        String currentLine;
+        String lineToRemove=null;
+        while ((currentLine = bufferedReader.readLine()) != null) {
+
+            if(temp==rowNumber){
+                lineToRemove=currentLine;
+            }
+            temp++;
+        }
+
+        return lineToRemove;
     }
 
     public boolean removeList(ListOfTasks listOfTasks, String login) {
@@ -92,7 +111,7 @@ public class ListManagerImpl implements ListManager {
             fileName = fileName.substring(0, fileName.length() - 4);
             if (fileName.equals(nameOfList)) {
                 ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
-                 new ListManagerImpl().addTaskToList(listOfTasks, newTaskName);
+
                 return listOfTasks;
             }
         }
@@ -160,10 +179,11 @@ public class ListManagerImpl implements ListManager {
         return mainList;
     }
 
-    private void writeWholeListToTxtFile(List mainList, PrintWriter printWriter) {
+    public void writeWholeListToTxtFile(List mainList, PrintWriter printWriter) {
         for (int i = 0; i < mainList.size(); i++) {
             printWriter.write(mainList.get(i) + "\n");
         }
         printWriter.flush();
+
     }
 }

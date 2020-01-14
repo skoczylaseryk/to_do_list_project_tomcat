@@ -23,10 +23,13 @@ public class DeleteTaskServlet extends HttpServlet {
         String login = request.getParameter("login");
         String nameOfList = request.getParameter("nameOfList");
         String task = request.getParameter("task");
+        int rowNumber = Integer.parseInt(request.getParameter("rowNumber"));
+
 
         listOfTasks = lm.findList(nameOfList, login);
 
-        lm.removeTaskFromList(listOfTasks, task);
+        String taskName =lm.findTaskByRowNumber(listOfTasks,rowNumber);
+        lm.removeTaskFromListByName(listOfTasks, taskName);
 
         List<String> listOfTasksNames = lm.getTasks(listOfTasks);
 

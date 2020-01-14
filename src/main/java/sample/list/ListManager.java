@@ -2,6 +2,7 @@ package sample.list;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public interface ListManager {
@@ -10,7 +11,9 @@ public interface ListManager {
 
     void addTaskToList(ListOfTasks listOfTasks, String task);
 
-    void removeTaskFromList(ListOfTasks listOfTasks, String task) throws IOException;
+    void removeTaskFromListByName(ListOfTasks listOfTasks, String task) throws IOException;
+
+    String findTaskByRowNumber(ListOfTasks listOfTasks, int rowNumber) throws IOException;
 
     boolean removeList(ListOfTasks listOfTasks, String login);
 
@@ -19,6 +22,8 @@ public interface ListManager {
     ListOfTasks findList(String inputNameOfList,String login) throws IOException;
 
     List<String> getTasks(ListOfTasks listOfTasks) throws IOException;
+
+    public void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
 
 
 }

@@ -18,8 +18,9 @@
 <body>
 <div class="container">
 
-    <% String nameOfList = request.getParameter("nameOfList");%>
-    <% String login = request.getParameter("login");%>
+    <% String nameOfList = request.getParameter("nameOfList");
+    String login = request.getParameter("login");
+    List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
     <h1>List: <%=nameOfList%>
     </h1>
 
@@ -29,16 +30,33 @@
         <input type="hidden" name="nameOfList" value="<%=nameOfList%>">
         <input type="hidden" name="login" value="<%=login%>">
     </form>
+    <form action="/SaveTasksServlet" method="post">
+        <input type="submit" name="Save" value="Save" onclick="saveToFile()">
+        <input type="hidden" name="allTasks" id="allTasks">
+        <input type="hidden" name="nameOfList" value="<%=nameOfList%>">
+        <input type="hidden" name="login" value="<%=login%>">
+        <script type="text/javascript">
+            function saveToFile() {
+                let n = <%=listOfTaskNames.size()%>;
+                let allTasks = "";
+                for (let i = 0; i < n; i++) {
+                    let task = document.getElementById("textId" + i.toString()).value;
+                    allTasks = allTasks + task + ";";
+                }
+                document.getElementById("allTasks").value = allTasks;
+            }
+        </script>
+    </form>
     <!-- TODO add method to read if task are done or not (states 'done' and 'todo') -->
 
     <%
-        List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");
         for (int i = 0; i < listOfTaskNames.size(); i++) {
     %>
     <form action="/DeleteTaskServlet" method="post">
         <input type="checkbox" name="checkbox<%=i%>" id="checkboxId<%=i%>" onclick="lineThroughChecked(this,<%=i%>)">
         <input type="text" name="task" id="textId<%=i%>" value="<%=listOfTaskNames.get(i)%>">
         <input type="submit" name="Delete" value="Delete">
+        <input type="hidden" name="rowNumber" value="<%=i%>">
         <input type="hidden" name="nameOfList" value="<%=nameOfList%>">
         <input type="hidden" name="login" value="<%=login%>">
         <script type="text/javascript">

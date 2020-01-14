@@ -1,17 +1,13 @@
 package sample.list.impl;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import sample.Log;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
-import sample.list.impl.ListManagerImpl;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -96,7 +92,7 @@ class listManagerTest {
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
 
-            listManager.removeTaskFromList(listOfTasks, "TestMessage2");
+            listManager.removeTaskFromListByName(listOfTasks, "TestMessage2");
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
             List<String> strings = new ArrayList<>();
@@ -131,7 +127,7 @@ class listManagerTest {
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
 
-            listManager.removeTaskFromList(listOfTasks, "TestMessage2");
+            listManager.removeTaskFromListByName(listOfTasks, "TestMessage2");
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
             List<String> strings = new ArrayList<>();
@@ -163,7 +159,7 @@ class listManagerTest {
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage2");
 
-            listManager.removeTaskFromList(listOfTasks, "TestMessage2");
+            listManager.removeTaskFromListByName(listOfTasks, "TestMessage2");
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
             List<String> strings = new ArrayList<>();

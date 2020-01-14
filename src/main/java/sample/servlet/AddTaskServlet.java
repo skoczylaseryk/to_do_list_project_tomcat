@@ -25,7 +25,8 @@ public class AddTaskServlet extends HttpServlet {
         String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
 
-         listOfTasks = lm.findList(nameOfList, login,newTaskName);
+         listOfTasks = lm.findList(nameOfList, login);
+         lm.addTaskToList(listOfTasks,newTaskName);
 
         List<String> listOfTasksNames = lm.getTasks(listOfTasks);
 
