@@ -33,7 +33,7 @@ private ListOfTasks listOfTasks;
 //        for(int i = 0 ; i < listOfAllTasks.size() ; i++){
 //            String splitedCharacter = listOfAllTasks.get(i).split("/")[0];
 //            characters.add(splitedCharacter);
-//            String splitedTask = listOfAllTasks.get(i).split("/")[1];                         Some fucking shiiiiit
+//            String splitedTask = listOfAllTasks.get(i).split("/")[1];
 //            tasks.add(splitedTask);
 //        }
 
