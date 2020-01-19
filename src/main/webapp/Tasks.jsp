@@ -2,6 +2,8 @@
 <%@ page import="sample.list.ListManager" %>
 <%@ page import="sample.list.impl.ListManagerImpl" %>
 <%@ page import="sample.list.ListOfTasks" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,11 +21,15 @@
 <div class="container">
 
     <% String nameOfList = request.getParameter("nameOfList");
-    String login = request.getParameter("login");
-    List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
+        String login = request.getParameter("login");
+        List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");
+        List<String> characters = (List<String>) request.getAttribute("characters");
+        System.out.println("Tasks.jsp seq char: " +characters);
+        System.out.println("Tasks.jsp listOfTasksNames: " + listOfTaskNames);
+
+    %>
     <h1>List: <%=nameOfList%>
     </h1>
-
     <form action="/AddTaskServlet" method="post">
         <input type="text" name="newTaskName">
         <input type="submit" name="Add" value="Add task">
@@ -40,8 +46,13 @@
                 let n = <%=listOfTaskNames.size()%>;
                 let allTasks = "";
                 for (let i = 0; i < n; i++) {
+                    let cb = document.getElementById("checkboxId" + i.toString());
                     let task = document.getElementById("textId" + i.toString()).value;
-                    allTasks = allTasks + task + ";";
+                    if (cb.checked) {
+                        allTasks = allTasks + "-/" + task + ";";
+                    } else {
+                        allTasks = allTasks + "+/" + task + ";";
+                    }
                 }
                 document.getElementById("allTasks").value = allTasks;
             }
@@ -69,10 +80,19 @@
                 }
             }
         </script>
+
     </form>
-
+    <script type="text/javascript">
+        let symbol = "<%=characters.get(i)%>";
+        if (symbol === "+") {
+            document.getElementById("checkboxId<%=i%>").checked = false;
+            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: none");
+        } else if (symbol === "-") {
+            document.getElementById("checkboxId<%=i%>").checked = true;
+            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: line-through");
+        }
+    </script>
     <%}%>
-
 </div>
 
 </body>

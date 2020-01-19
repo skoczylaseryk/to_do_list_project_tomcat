@@ -120,20 +120,18 @@ public class ListManagerImpl implements ListManager {
 
     @Override
     public List<String> getTasks(ListOfTasks listOfTasks) throws IOException {
-       List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         String line ;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
-        do {
-            line = bufferedReader.readLine();
+        line = bufferedReader.readLine();
+        while(line!=null){
             list.add(line);
-
-        } while (line != null);
+            line = bufferedReader.readLine();
+        }
         bufferedReader.close();
-        list.remove(list.size() - 1); //because bufferedReader adds last line as null
-
+//        list.remove(list.size() - 1); //because bufferedReader adds last line as null
         return list;
     }
-
 
     private File replaceOldFileClearFile(ListOfTasks listOfTasks) throws IOException {
         File file = listOfTasks.getFile();
@@ -185,5 +183,19 @@ public class ListManagerImpl implements ListManager {
         }
         printWriter.flush();
 
+    }
+    public List<String> getCharacterList(ListOfTasks listOfTasks) throws IOException {
+        List<String> list = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
+        String line = bufferedReader.readLine();
+        while(line!=null){
+            if(line.startsWith("-/") || line.startsWith("+/")){
+                line = line.split("/")[0];
+
+            }
+            list.add(line);
+             line = bufferedReader.readLine();
+        }
+        return list;
     }
 }

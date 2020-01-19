@@ -1,5 +1,6 @@
 package sample.list;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +24,7 @@ public interface ListManager {
 
     List<String> getTasks(ListOfTasks listOfTasks) throws IOException;
 
-    public void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
+     void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
 
-
+    List<String> getCharacterList(ListOfTasks listOfTasks) throws IOException;
 }

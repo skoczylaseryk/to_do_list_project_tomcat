@@ -1,10 +1,8 @@
-package sample.servlet;
+package sample.servlets;
 
 import sample.list.ListManager;
 import sample.list.impl.ListManagerImpl;
 import sample.list.ListOfTasks;
-import sample.services.UserService;
-import sample.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +17,8 @@ import java.util.List;
 public class AddTaskServlet extends HttpServlet {
     private ListManager lm = ListManagerImpl.getInstance();
     private ListOfTasks listOfTasks;
+    private String splitedTask;
+    private List<String> tasks = new ArrayList<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String newTaskName = request.getParameter("newTaskName");
@@ -29,9 +29,20 @@ public class AddTaskServlet extends HttpServlet {
          lm.addTaskToList(listOfTasks,newTaskName);
 
         List<String> listOfTasksNames = lm.getTasks(listOfTasks);
+        listOfTasks = lm.findList(nameOfList, login);
+        for(int i = 0 ; i < listOfTasksNames.size() ; i++){
+            if(listOfTasksNames.get(i).endsWith("/") || listOfTasksNames.get(i).equals("")){            //TODO in the second occur program generates empty field when click save
+                splitedTask="";
+            }else{
+                splitedTask = listOfTasksNames.get(i).split("/")[1];
+            }
+            System.out.println("splittedTask" + splitedTask);
+            tasks.add(splitedTask);
+        }
+        List<String> characters = lm.getCharacterList(listOfTasks);
 
-
-        request.setAttribute("listOfTasksNames", listOfTasksNames);
+        request.setAttribute("listOfTasksNames", tasks);
+        request.setAttribute("characters",characters);
         request.setAttribute("nameOfList", nameOfList); //TODO when nameOfList is null after adding task
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }

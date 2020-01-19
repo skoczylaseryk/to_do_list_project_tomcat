@@ -1,4 +1,4 @@
-package sample.servlet;
+package sample.servlets;
 
 import sample.list.ListManager;
 import sample.list.impl.ListManagerImpl;
