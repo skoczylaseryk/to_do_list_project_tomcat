@@ -29,20 +29,13 @@ private ListOfTasks listOfTasks;
         List<String> tasks = new ArrayList<>();
 
         List<String> listOfAllTasks = Arrays.asList(allTasks.split(";"));
-//
-//        for(int i = 0 ; i < listOfAllTasks.size() ; i++){
-//            String splitedCharacter = listOfAllTasks.get(i).split("/")[0];
-//            characters.add(splitedCharacter);
-//            String splitedTask = listOfAllTasks.get(i).split("/")[1];                         Some fucking shiiiiit
-//            tasks.add(splitedTask);
-//        }
 
         lm.writeWholeListToTxtFile(listOfAllTasks,new PrintWriter(new FileWriter("C:\\resources\\lists\\" + login + "\\" + nameOfList + ".txt")));
 
-        List<String> listOfTasksNames = lm.getTasks(listOfTasks);           //TODO remove this
+        List<String> listOfTasksNames = lm.getTasks(listOfTasks);
 
-        request.setAttribute("listOfTasksNames", listOfTasksNames);         //TODO change all listOfTasksNames to listOfAllTasks
-        request.setAttribute("nameOfList", nameOfList);                             // TODO checked and unchecked
+        request.setAttribute("listOfTasksNames", listOfTasksNames);
+        request.setAttribute("nameOfList", nameOfList);
 
         request.getRequestDispatcher("Tasks.jsp").forward(request,response);
     }
