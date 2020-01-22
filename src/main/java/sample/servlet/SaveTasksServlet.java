@@ -32,9 +32,19 @@ private ListOfTasks listOfTasks;
         List<String> characters = new ArrayList<>();
         List<String> tasks = new ArrayList<>();
         List<String> listOfAllTasks = Arrays.asList(allTasks.split(";"));
+<<<<<<< HEAD:src/main/java/sample/servlets/SaveTasksServlet.java
 
         System.out.println("listOfAllTasks" + listOfAllTasks);
 
+=======
+//
+//        for(int i = 0 ; i < listOfAllTasks.size() ; i++){
+//            String splitedCharacter = listOfAllTasks.get(i).split("/")[0];
+//            characters.add(splitedCharacter);
+//            String splitedTask = listOfAllTasks.get(i).split("/")[1];                         Some fucking shiiiiit
+//            tasks.add(splitedTask);
+//        }
+>>>>>>> parent of 13d3c9c... commitToMergeToMaster:src/main/java/sample/servlet/SaveTasksServlet.java
 
         lm.writeWholeListToTxtFile(listOfAllTasks,new PrintWriter(new FileWriter("C:\\resources\\lists\\" + login + "\\" + nameOfList + ".txt")));
 
