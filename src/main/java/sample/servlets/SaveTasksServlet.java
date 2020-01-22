@@ -31,24 +31,9 @@ private ListOfTasks listOfTasks;
         listOfTasks = lm.findList(nameOfList, login);
         List<String> characters = new ArrayList<>();
         List<String> tasks = new ArrayList<>();
-        String splitedTask;
         List<String> listOfAllTasks = Arrays.asList(allTasks.split(";"));
 
         System.out.println("listOfAllTasks" + listOfAllTasks);
-
-        for(int i = 0 ; i < listOfAllTasks.size() ; i++){
-            String splitedCharacter = listOfAllTasks.get(i).split("/")[0];
-            characters.add(splitedCharacter);
-            System.out.println("splittedCharacter " + splitedCharacter);
-
-            if(listOfAllTasks.get(i).endsWith("/") || listOfAllTasks.get(i).equals("")){            //TODO in the second occur program generates empty field when click save
-                splitedTask="";
-            }else{
-                splitedTask = listOfAllTasks.get(i).split("/")[1];
-            }
-            System.out.println("splittedTask" + splitedTask);
-            tasks.add(splitedTask);
-        }
 
 
         lm.writeWholeListToTxtFile(listOfAllTasks,new PrintWriter(new FileWriter("C:\\resources\\lists\\" + login + "\\" + nameOfList + ".txt")));

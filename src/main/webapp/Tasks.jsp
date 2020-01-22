@@ -60,7 +60,7 @@
     </form>
     <!-- TODO add method to read if task are done or not (states 'done' and 'todo') -->
 
-    <%
+    <%if(listOfTaskNames.size()>0){
         for (int i = 0; i < listOfTaskNames.size(); i++) {
     %>
     <form action="/DeleteTaskServlet" method="post">
@@ -82,17 +82,17 @@
         </script>
 
     </form>
-    <script type="text/javascript">
-        let symbol = "<%=characters.get(i)%>";
-        if (symbol === "+") {
-            document.getElementById("checkboxId<%=i%>").checked = false;
-            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: none");
-        } else if (symbol === "-") {
-            document.getElementById("checkboxId<%=i%>").checked = true;
-            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: line-through");
-        }
-    </script>
-    <%}%>
+<%--    <script type="text/javascript">--%>
+<%--        let symbol = "<%=characters.get(i)%>";--%>
+<%--        if (symbol === "+") {--%>
+<%--            document.getElementById("checkboxId<%=i%>").checked = false;--%>
+<%--            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: none");--%>
+<%--        } else if (symbol === "-") {--%>
+<%--            document.getElementById("checkboxId<%=i%>").checked = true;--%>
+<%--            document.getElementById("textId<%=i%>").setAttribute("style", "text-decoration: line-through");--%>
+<%--        }--%>
+<%--    </script>--%>
+    <%}}%>
 </div>
 
 </body>

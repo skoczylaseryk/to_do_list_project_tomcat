@@ -50,7 +50,7 @@ public class ListManagerImpl implements ListManager {
 
 
         PrintWriter printWriter = listOfTasks.getPrintWriter();
-        printWriter.println(task);
+        printWriter.println("+/" + task);
         printWriter.flush();
 
     }
