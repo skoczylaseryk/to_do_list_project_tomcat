@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
                 return 0;
             }
            if(!checkIllegalCharacters(login)){
-                System.out.println("Login cannot contain special characters");
+                System.out.println("Login cannot contain specjal characters");
                 return 1;
             }
         }

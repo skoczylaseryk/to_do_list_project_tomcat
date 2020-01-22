@@ -1,4 +1,4 @@
-package sample.servlets;
+package sample.servlet;
 
 import sample.list.ListManager;
 import sample.list.ListOfTasks;

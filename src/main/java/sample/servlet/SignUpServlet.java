@@ -1,4 +1,4 @@
-package sample.servlets;
+package sample.servlet;
 
 import sample.services.UserService;
 import sample.services.impl.UserServiceImpl;
