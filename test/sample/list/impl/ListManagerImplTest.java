@@ -201,7 +201,7 @@ class listManagerTest {
     void editNameOfList() {
         try {
             ListOfTasks listOfTasks = listManager.createNewTaskList("testFolder", "MyList");
-            try {
+                try {
                 listManager.editNameOfList("testFolder", listOfTasks, "OtherList10");
             } catch (IOException e) {
                 e.printStackTrace();

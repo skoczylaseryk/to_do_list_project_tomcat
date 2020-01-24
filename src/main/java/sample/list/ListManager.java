@@ -23,7 +23,7 @@ public interface ListManager {
 
     List<String> getTasks(ListOfTasks listOfTasks) throws IOException;
 
-    public void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
+     void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
 
 
 }

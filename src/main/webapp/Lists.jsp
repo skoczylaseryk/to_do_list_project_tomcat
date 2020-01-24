@@ -30,10 +30,17 @@
 
 </head>
 <body>
+
 <div class="container">
     <% String login = request.getParameter("login");%>
     <% String newListNumber = String.valueOf(request.getAttribute("newListNumber"));%>
-    <h1>Hello, <%=login%> *(^o^)*</h1>
+            <h1>Hello, <%=login%></h1>
+                <form action="index.jsp">
+                    <input type="submit" name="Logout" value="Log out">
+                </form>
+
+    <h2>Your task lists:</h2>
+
 
     <form action="/AddListServlet" method="post">
         <input type="text" name="newTaskListName" placeholder="NewList<%=newListNumber%>">
@@ -41,7 +48,6 @@
         <input type="hidden" name="login" value="<%=login%>">
     </form>
 
-    <h2>Your task lists:</h2>
     <% UserServiceImpl userServiceImpl = UserServiceImpl.getInstance(); %>
 
     <%
@@ -63,12 +69,12 @@
         %>
         <table>
 
-        <input type=submit name="nameOfList" value="<%=name%>">
-        <input type=hidden name="login" value="<%=login%>">
+            <input type=submit name="nameOfList" value="<%=name%>">
+            <input type=hidden name="login" value="<%=login%>">
         </table>
         <br>
 
-    <%}%>
+        <%}%>
     </form>
 
 </div>

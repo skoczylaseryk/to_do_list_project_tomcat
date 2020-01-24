@@ -8,10 +8,9 @@ import java.util.logging.SimpleFormatter;
 
 public class Log {
 
-    static private FileHandler logFile;
-    static private SimpleFormatter formatterTxt;
+    private static  FileHandler logFile;
 
-    static public void setup() throws IOException{
+    public static void setup() throws IOException{
 
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 

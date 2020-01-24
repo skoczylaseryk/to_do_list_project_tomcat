@@ -31,8 +31,6 @@ public class VerificationFilter implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
             request.setAttribute("wrongCredentials","true");
-            //HttpSession httpSession = request.getSession();                   //sprawdzic atrybuty dla sesji
-            //httpSession.setAttribute("wrongCredentials","true");
             System.out.println(request.getAttribute("wrongCredentials"));
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }

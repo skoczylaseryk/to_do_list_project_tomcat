@@ -21,8 +21,10 @@
     <% String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
         List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
-    <h1>List: <%=nameOfList%>
-    </h1>
+    <h1>List: <%=nameOfList%></h1>
+    <form action="index.jsp">
+        <input type="submit" name="Logout" value="Log out">
+    </form>
 
     <form action="/AddTaskServlet" method="post">
         <input type="text" name="newTaskName">
@@ -31,9 +33,21 @@
         <input type="hidden" name="login" value="<%=login%>">
     </form>
     <form action="/SaveTasksServlet" method="post">
-        <input type="submit" name="Save" value="Save">
+        <input type="submit" name="Save" value="Save" onclick="saveToFile()">
+        <input type="hidden" name="allTasks" id="allTasks">
         <input type="hidden" name="nameOfList" value="<%=nameOfList%>">
         <input type="hidden" name="login" value="<%=login%>">
+        <script type="text/javascript">
+            function saveToFile() {
+                let n = <%=listOfTaskNames.size()%>;
+                let allTasks = "";
+                for (let i = 0; i < n; i++) {
+                    let task = document.getElementById("textId" + i.toString()).value;
+                    allTasks = allTasks + task + ";";
+                }
+                document.getElementById("allTasks").value = allTasks;
+            }
+        </script>
     </form>
     <!-- TODO add method to read if task are done or not (states 'done' and 'todo') -->
 
