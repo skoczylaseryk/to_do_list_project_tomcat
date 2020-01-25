@@ -22,9 +22,17 @@
         String login = request.getParameter("login");
         List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
     <h1>List: <%=nameOfList%></h1>
-    <form action="index.jsp">
-        <input type="submit" name="Logout" value="Log out">
+
+    <form action="/LogOutServlet" method="post">
+        <h2><%=login%>
+            <input type="submit" id="Logout" name="Logout" value="Log out"></h2>
+        <input type="hidden" name="logout" value="logout">
     </form>
+
+    <form action="/HomeServlet" method="post">
+        <input type="submit" name="Lists" value="Lists">
+    </form>
+
 
     <form action="/AddTaskServlet" method="post">
         <input type="text" name="newTaskName">

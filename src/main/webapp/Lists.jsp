@@ -32,12 +32,16 @@
 <body>
 
 <div class="container">
-    <% String login = request.getParameter("login");%>
+    <%User user = (User) session.getAttribute("user");%>
+    <% String login = user.getLogin();%>
     <% String newListNumber = String.valueOf(request.getAttribute("newListNumber"));%>
-            <h1>Hello, <%=login%></h1>
-                <form action="index.jsp">
-                    <input type="submit" name="Logout" value="Log out">
-                </form>
+
+    <form action="/LogOutServlet" method="post">
+        <h2>Hello, <%=login%>
+            <input type="submit" id="Logout" name="Logout" value="Log out"></h2>
+        <input type="hidden" name="logout" value="logout">
+    </form>
+
 
     <h2>Your task lists:</h2>
 
@@ -54,7 +58,7 @@
 
         File[] files = new File(userServiceImpl.getCONTEXTPATH() + "/lists/" + login).listFiles();
         Arrays.sort(files, new FileComparator());
-        System.out.println(Arrays.toString(files));
+        System.out.println("Lists.jsp array: " + Arrays.toString(files));
 
     %>
     <form action=/ListOfTasksServlet method="post">

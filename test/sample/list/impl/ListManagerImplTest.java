@@ -91,7 +91,6 @@ class listManagerTest {
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
             listManager.addTaskToList(listOfTasks, "TestMessage");
-
             listManager.removeTaskFromListByName(listOfTasks, "TestMessage2");
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));

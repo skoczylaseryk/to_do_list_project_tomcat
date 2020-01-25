@@ -32,7 +32,7 @@ public class AddTaskServlet extends HttpServlet {
 
 
         request.setAttribute("listOfTasksNames", listOfTasksNames);
-        request.setAttribute("nameOfList", nameOfList); //TODO when nameOfList is null after adding task
+        request.setAttribute("nameOfList", nameOfList);
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
     }
 }

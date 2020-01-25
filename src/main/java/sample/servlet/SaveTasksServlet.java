@@ -45,7 +45,6 @@ public class SaveTasksServlet extends HttpServlet {
 
         request.setAttribute("listOfTasksNames", listOfTasksNames);
         request.setAttribute("nameOfList", nameOfList);
-
         request.getRequestDispatcher("Tasks.jsp").forward(request, response);
 
     }

@@ -35,7 +35,7 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        int newListNumber= fileService.getLastNumberOfFile(req,login);
+        int newListNumber= fileService.getLastNumberOfFile(req,user.getLogin());
         req.setAttribute("newListNumber",newListNumber);
 
 

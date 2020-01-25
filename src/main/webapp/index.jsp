@@ -12,11 +12,19 @@
 </head>
 <body>
 
+<%--<%String logOutValue=%>--%>
+<%System.out.println(request.getAttribute("logout"));%>
+
     <div class="container">
         <h2>Input login and password</h2>
         <%if(request.getAttribute("wrongCredentials")== "true"){ %>
            <h5 id="incLogOrPass">Incorrect login or password</h5>
-       <%}%>
+       <%}
+        else if(request.getAttribute("logout")==null){                                      //TODO It works but this if is not proffesional
+       }
+        else {%>
+            <h5 id="incLogOrPass">You have been logged out</h5>
+        <%}%>
         <form action="/HomeServlet" method="post">
             <input type="text" id="login" name="login" placeholder="Login"><br>
             <input type="password" id="password"name="password" placeholder="Password"><br>
