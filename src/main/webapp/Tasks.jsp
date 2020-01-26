@@ -26,10 +26,9 @@
     <form action="/LogOutServlet" method="post">
         <h2><%=login%>
             <input type="submit" id="Logout" name="Logout" value="Log out"></h2>
-        <input type="hidden" name="logout" value="logout">
     </form>
 
-    <form action="/HomeServlet" method="post">
+    <form action="Lists.jsp" method="post">
         <input type="submit" name="Lists" value="Lists">
     </form>
 

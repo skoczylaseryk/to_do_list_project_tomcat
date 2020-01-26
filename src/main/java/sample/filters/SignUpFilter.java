@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/SignUpServlet")
+@WebFilter(filterName = "SignUpServlet", urlPatterns = "/SignUpServlet")
 public class SignUpFilter implements Filter {
     private UserService userService = UserServiceImpl.getInstance();
 
@@ -23,16 +23,16 @@ public class SignUpFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        String login =request.getParameter("login");
+        String login = request.getParameter("login");
         int verifyResult = userService.verifySignUpData(login);
-        if(verifyResult==0){
-            request.setAttribute("verifyResult","0");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
-        }else if(verifyResult==1){
-            request.setAttribute("verifyResult","1");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
-        }else if(verifyResult==2) {
-            filterChain.doFilter(request,response);
+        if (verifyResult == 0) {
+            request.setAttribute("verifyResult", "0");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        } else if (verifyResult == 1) {
+            request.setAttribute("verifyResult", "1");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        } else if (verifyResult == 2) {
+            filterChain.doFilter(request, response);
         }
 
     }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/HomeServlet")
+@WebFilter(filterName = "HomeServlet", urlPatterns = "/HomeServlet")
 public class VerificationFilter implements Filter {
     UserService userService = UserServiceImpl.getInstance();
 
@@ -32,23 +32,22 @@ public class VerificationFilter implements Filter {
         String password;
 
 
-
-        if(session.getAttribute("user") != null ) {
-            User user =(User)session.getAttribute("user");
-             login = user.getLogin();
-             password =user.getPassword();
-        }else{
+        if (session.getAttribute("user") != null) {
+            User user = (User) session.getAttribute("user");
+            login = user.getLogin();
+            password = user.getPassword();
+        } else {
             login = request.getParameter("login");
             password = request.getParameter("password");
         }
 
 
-        if (userService.verifyLoginData(login, password)){
-            filterChain.doFilter(servletRequest,servletResponse);
-        } else{
-            request.setAttribute("wrongCredentials","true");
+        if (userService.verifyLoginData(login, password)) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            request.setAttribute("wrongCredentials", "true");
             System.out.println(request.getAttribute("wrongCredentials"));
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

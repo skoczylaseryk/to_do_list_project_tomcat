@@ -21,6 +21,11 @@ public class ListOfTasksServlet extends HttpServlet {
     private ListOfTasks listOfTasks;
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String nameOfList = req.getParameter("nameOfList");

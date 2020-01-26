@@ -12,15 +12,10 @@ import java.io.IOException;
 public class LogOutServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String logout= request.getParameter("logout");
+        request.getSession().invalidate();
 
-        request.setAttribute("logout",logout);
-
-        HttpSession session = request.getSession(false);
-        session.setAttribute("user",null);
-
+        request.setAttribute("logout","logout");
         request.getRequestDispatcher("index.jsp").forward(request,response);
-
     }
 
 }

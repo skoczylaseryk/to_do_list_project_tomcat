@@ -32,14 +32,13 @@
 <body>
 
 <div class="container">
-    <%User user = (User) session.getAttribute("user");%>
-    <% String login = user.getLogin();%>
-    <% String newListNumber = String.valueOf(request.getAttribute("newListNumber"));%>
+    <% User user = (User) session.getAttribute("user"); %>
+    <% String login = user.getLogin(); %>
+    <% String newListNumber = String.valueOf(request.getAttribute("newListNumber")); %>
 
     <form action="/LogOutServlet" method="post">
         <h2>Hello, <%=login%>
             <input type="submit" id="Logout" name="Logout" value="Log out"></h2>
-        <input type="hidden" name="logout" value="logout">
     </form>
 
 

@@ -1,8 +1,6 @@
 package sample.servlet;
 
 
-
-
 import sample.services.FileService;
 import sample.services.impl.FileServiceImpl;
 import sample.user.User;
@@ -19,6 +17,10 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     FileService fileService = FileServiceImpl.getInstance();
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,12 +37,12 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        int newListNumber= fileService.getLastNumberOfFile(req,user.getLogin());
-        req.setAttribute("newListNumber",newListNumber);
 
 
-        req.getRequestDispatcher("Lists.jsp").forward(req,resp);
+        int newListNumber = fileService.getLastNumberOfFile(req, user.getLogin());
+        req.setAttribute("newListNumber", newListNumber);
 
 
+        req.getRequestDispatcher("Lists.jsp").forward(req, resp);
     }
 }
