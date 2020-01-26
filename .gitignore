@@ -28,3 +28,6 @@ hs_err_pid*
 # Folders #
 .idea
 target
+
+# Iml file #
+*.iml
