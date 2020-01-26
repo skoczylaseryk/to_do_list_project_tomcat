@@ -190,7 +190,7 @@ public class ListManagerImplTest {
             e.printStackTrace();
             fail();
         }
-        boolean result = listManager.removeList(listOfTasks, "testFolder");
+        boolean result = listManager.removeList(listOfTasks);
         assertEquals(true, result);
     }
 

@@ -15,7 +15,7 @@ public interface ListManager {
 
     String findTaskByRowNumber(ListOfTasks listOfTasks, int rowNumber) throws IOException;
 
-    boolean removeList(ListOfTasks listOfTasks, String login);
+    boolean removeList(ListOfTasks listOfTasks);
 
     void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException;
 

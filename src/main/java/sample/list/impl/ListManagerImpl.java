@@ -91,9 +91,8 @@ public class ListManagerImpl implements ListManager {
         return lineToRemove;
     }
 
-    public boolean removeList(ListOfTasks listOfTasks, String login) {
+    public boolean removeList(ListOfTasks listOfTasks) {
 
-//        File file = new File(userService.getCONTEXTPATH() + "\\lists\\" + login + "\\" + listOfTasks.getName() + ".txt");
         try {
             FileUtils.forceDelete(listOfTasks.getFile());
         } catch (IOException e) {
@@ -106,13 +105,11 @@ public class ListManagerImpl implements ListManager {
     public void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException {
         listOfTasks.setName(newNameOfList);
         listOfTasks.getFile().renameTo(new File(listOfTasks.getFile().getParentFile() + File.separator + newNameOfList));
-//        FileUtils.moveFile(listOfTasks.getFile(), new File(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt"));
-//        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
-//        listOfTasks.getPrintWriter().print("");
+
     }
 
     @Override
-    public ListOfTasks findList(String nameOfList, String login) throws IOException {                  //Todo finish this method and in ADDTaskservlet also
+    public ListOfTasks findList(String nameOfList, String login) throws IOException {
         for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
             String fileName = file.getName();
             fileName = fileName.substring(0, fileName.length() - 4);
@@ -136,7 +133,7 @@ public class ListManagerImpl implements ListManager {
 
         } while (line != null);
         bufferedReader.close();
-        list.remove(list.size() - 1); //because bufferedReader adds last line as null
+        list.remove(list.size() - 1);
 
         return list;
     }

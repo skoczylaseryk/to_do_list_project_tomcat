@@ -49,24 +49,25 @@
         Arrays.sort(files, new FileComparator());
 
     %>
-    <form action=/ListOfTasksServlet method="post">
-        <%
-            for (int i = 0; i < files.length; i++) {
-
-
-                String fileName = files[i].getName();
-                String name = fileName.substring(0, fileName.length() - 4);
-
-        %>
-        <table>
-
-            <input type=submit name="nameOfList" value="<%=name%>">
-            <input type=hidden name="login" value="<%=login%>">
-        </table>
-        <br>
-
-        <%}%>
-    </form>
+    <%
+        for (int i = 0; i < files.length; i++) {
+            String fileName = files[i].getName();
+            System.out.println(fileName);
+            String name = fileName.substring(0, fileName.length() - 4);
+    %>
+    <table>
+        <tr>
+            <form action=/ListOfTasksServlet method="post">
+                <input type=submit name="nameOfList" value="<%=name%>">
+                <input type=hidden name="login" value="<%=login%>">
+            </form>
+            <form action="/DeleteListServlet" method="post">
+                <input type="submit" name="deleteList" value="Delete">
+                <input type="hidden" name="nameOfList" value="<%=name%>">
+            </form>
+        </tr>
+    </table>
+    <%}%>
 
 </div>
 

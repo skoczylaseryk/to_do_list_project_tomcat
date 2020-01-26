@@ -18,17 +18,19 @@
     <% String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
         List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
-    <h1>List: <%=nameOfList%>
-    </h1>
 
-    <form action="/LogOutServlet" method="post">
+
+    <form action="/LogOutServlet" method="post" id="logout">
         <h2><%=login%>
             <input type="submit" id="Logout" name="Logout" value="Log out"></h2>
         <input type="hidden" name="logout" value="logout">
     </form>
 
+    <h1>List: <%=nameOfList%>
+    </h1>
+
     <form action="/HomeServlet" method="post">
-        <input type="submit" name="Lists" value="Lists">
+        <input type="submit" name="Lists" value="Back to Lists">
     </form>
 
 
