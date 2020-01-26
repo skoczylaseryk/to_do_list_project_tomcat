@@ -28,7 +28,10 @@
     <%} else if (request.getAttribute("verifyResult") == "1") {%>
     <h5 id="incLogOrPass">You cannot use special characters
         like:!,@,#,$,%,^,&,*,(,),?,:,;,',",>,<,",",".",{,},[,],\,|,/</h5>
+    <%} else if (request.getAttribute("verifyResult")== "3"){%>
+    <h5 id="incLogOrPass">Password cannot be empty</h5>
     <%}%>
+
 
 
     <form action="SignUpServlet">

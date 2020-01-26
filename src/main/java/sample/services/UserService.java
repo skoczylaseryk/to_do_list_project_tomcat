@@ -8,7 +8,7 @@ public interface UserService {
 
     boolean verifyLoginData(String login, String password) throws IOException;
 
-    int verifySignUpData(String login);
+    int verifySignUpData(String login,String password);
 
     String getCONTEXTPATH();
 

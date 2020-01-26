@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public int verifySignUpData(String login) {
+    public int verifySignUpData(String login,String password) {
         UserServiceImpl userServiceImpl = UserServiceImpl.getInstance();
         for (File file : new File(userServiceImpl.getCONTEXTPATH() + "/users/").listFiles()) {
             String fileName = file.getName();
@@ -62,6 +62,9 @@ public class UserServiceImpl implements UserService {
             }
             if (!checkIllegalCharacters(login)) {
                 return 1;
+            }
+            if(password.equals("")){
+                return 3;
             }
         }
         return 2;
