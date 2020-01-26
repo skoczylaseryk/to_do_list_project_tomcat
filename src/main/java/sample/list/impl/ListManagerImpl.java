@@ -14,45 +14,50 @@ import java.util.logging.Logger;
 
 public class ListManagerImpl implements ListManager {
 
-    private final static Logger LogMe = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final static Logger LOG = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private UserService userService = UserServiceImpl.getInstance();
     private static ListManagerImpl LISTMANAGER;
 
     private ListManagerImpl() {
     }
 
-    public static ListManagerImpl getInstance(){
-        if(LISTMANAGER==null){
+    public static ListManagerImpl getInstance() {
+        if (LISTMANAGER == null) {
             return new ListManagerImpl();
         }
         return LISTMANAGER;
     }
 
     public ListOfTasks createNewTaskList(String login, String nameOfList) throws FileNotFoundException {
-        LogMe.setLevel(Level.INFO);
-        LogMe.info("Starting method _createNewTaskList_");
+        LOG.setLevel(Level.INFO);
+        LOG.info("Starting method _createNewTaskList_");
         File file1 = new File(userService.getCONTEXTPATH() + "/lists/" + login + "/");
 
         if (!file1.exists()) {
-            LogMe.info("Creating directory, which isn't exist");
+            LOG.info("Creating directory, which isn't exist");
             new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").mkdirs();
         }
-        LogMe.info("Creating file with _" + nameOfList + "_.txt name");
-        File file = new File(userService.getCONTEXTPATH() + "/lists/" + login + "/" + nameOfList + ".txt");
-        LogMe.info("File _" + nameOfList + "_ has been created");
-        PrintWriter printWriter = new PrintWriter(file);
-        ListOfTasks list = new ListOfTasks(nameOfList, file, printWriter);
+        LOG.info("Creating file with _" + nameOfList + "_.txt name");
+        File file = new File(userService.getCONTEXTPATH() + File.separator + "lists/" + login + "/" + nameOfList + ".txt");
+        try {
+            if(file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LOG.info("File _" + nameOfList + "_ has been created");
+        ListOfTasks list = new ListOfTasks(nameOfList, file, false);
         return list;
     }
 
 
     public void addTaskToList(ListOfTasks listOfTasks, String task) {
-
-
-        PrintWriter printWriter = listOfTasks.getPrintWriter();
+        PrintWriter printWriter = listOfTasks.getOpenPrintWriter();
         printWriter.println(task);
         printWriter.flush();
-
+        printWriter.close();
     }
 
     public void removeTaskFromListByName(ListOfTasks listOfTasks, String task) throws IOException {
@@ -65,21 +70,20 @@ public class ListManagerImpl implements ListManager {
         PrintWriter printWriter = new PrintWriter(replaceOldFileClearFile(listOfTasks));
 
         writeWholeListToTxtFile(mainList, printWriter);
-
+        bufferedReader.close();
     }
 
     @Override
     public String findTaskByRowNumber(ListOfTasks listOfTasks, int rowNumber) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
-        int temp=0;
+        int temp = 0;
 
-        List<String> strings = new ArrayList<>();
         String currentLine;
-        String lineToRemove=null;
+        String lineToRemove = null;
         while ((currentLine = bufferedReader.readLine()) != null) {
 
-            if(temp==rowNumber){
-                lineToRemove=currentLine;
+            if (temp == rowNumber) {
+                lineToRemove = currentLine;
             }
             temp++;
         }
@@ -89,19 +93,22 @@ public class ListManagerImpl implements ListManager {
 
     public boolean removeList(ListOfTasks listOfTasks, String login) {
 
-        File file = new File(userService.getCONTEXTPATH() + "\\lists\\" + login + "\\" + listOfTasks.getName() + ".txt");
-        return file.delete();
+//        File file = new File(userService.getCONTEXTPATH() + "\\lists\\" + login + "\\" + listOfTasks.getName() + ".txt");
+        try {
+            FileUtils.forceDelete(listOfTasks.getFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return !listOfTasks.getFile().exists();
     }
 
 
     public void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException {
         listOfTasks.setName(newNameOfList);
-        listOfTasks.getPrintWriter().close();
-
-        FileUtils.moveFile(listOfTasks.getFile(), new File(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt"));
-        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
-        listOfTasks.getPrintWriter().print("");
-
+        listOfTasks.getFile().renameTo(new File(listOfTasks.getFile().getParentFile() + File.separator + newNameOfList));
+//        FileUtils.moveFile(listOfTasks.getFile(), new File(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt"));
+//        listOfTasks.setPrintWriter(new PrintWriter(new FileWriter(userService.getCONTEXTPATH() + "/lists/" + login + "/" + newNameOfList + ".txt", true)));
+//        listOfTasks.getPrintWriter().print("");
     }
 
     @Override
@@ -110,7 +117,7 @@ public class ListManagerImpl implements ListManager {
             String fileName = file.getName();
             fileName = fileName.substring(0, fileName.length() - 4);
             if (fileName.equals(nameOfList)) {
-                ListOfTasks listOfTasks = new ListOfTasks(fileName, file, new PrintWriter(new FileWriter(file, true)));
+                ListOfTasks listOfTasks = new ListOfTasks(fileName, file, true);
 
                 return listOfTasks;
             }
@@ -120,8 +127,8 @@ public class ListManagerImpl implements ListManager {
 
     @Override
     public List<String> getTasks(ListOfTasks listOfTasks) throws IOException {
-       List<String> list = new ArrayList<>();
-        String line ;
+        List<String> list = new ArrayList<>();
+        String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(listOfTasks.getFile()));
         do {
             line = bufferedReader.readLine();
@@ -144,9 +151,10 @@ public class ListManagerImpl implements ListManager {
 
     private List<String> addToUpperList(BufferedReader bufferedReader, String task) throws IOException {
         List<String> upperSubList = new ArrayList<>();
-        String currentLine;
-        while (!(currentLine = bufferedReader.readLine()).equals(task)) {
+        String currentLine = bufferedReader.readLine();
+        while (currentLine!= null && !currentLine.equals(task)) {
             upperSubList.add(currentLine);
+            currentLine = bufferedReader.readLine();
         }
 
         return upperSubList;
@@ -184,6 +192,7 @@ public class ListManagerImpl implements ListManager {
             printWriter.write(mainList.get(i) + "\n");
         }
         printWriter.flush();
+        printWriter.close();
 
     }
 }

@@ -19,16 +19,14 @@ public class DeleteTaskServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO handle this servlet
         String login = request.getParameter("login");
         String nameOfList = request.getParameter("nameOfList");
-        String task = request.getParameter("task");
         int rowNumber = Integer.parseInt(request.getParameter("rowNumber"));
 
 
         listOfTasks = lm.findList(nameOfList, login);
 
-        String taskName =lm.findTaskByRowNumber(listOfTasks,rowNumber);
+        String taskName = lm.findTaskByRowNumber(listOfTasks, rowNumber);
         lm.removeTaskFromListByName(listOfTasks, taskName);
 
         List<String> listOfTasksNames = lm.getTasks(listOfTasks);

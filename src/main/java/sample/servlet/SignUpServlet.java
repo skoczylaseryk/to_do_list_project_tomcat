@@ -19,10 +19,8 @@ public class SignUpServlet extends HttpServlet {
         String parameter1 = req.getParameter("login");
         String parameter2 = req.getParameter("password");
 
-        System.out.println("signupservlet: " + parameter1);
-        System.out.println("signupservlet: " + parameter2);
 
-            userService.createUser(parameter1, parameter2);
+        userService.createUser(parameter1, parameter2);
         resp.sendRedirect("index.jsp");
     }
 }

@@ -23,16 +23,16 @@ public class SignUpFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        String login =request.getParameter("login");
+        String login = request.getParameter("login");
         int verifyResult = userService.verifySignUpData(login);
-        if(verifyResult==0){
-            request.setAttribute("verifyResult","0");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
-        }else if(verifyResult==1){
-            request.setAttribute("verifyResult","1");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
-        }else if(verifyResult==2) {
-            filterChain.doFilter(request,response);
+        if (verifyResult == 0) {
+            request.setAttribute("verifyResult", "0");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        } else if (verifyResult == 1) {
+            request.setAttribute("verifyResult", "1");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        } else if (verifyResult == 2) {
+            filterChain.doFilter(request, response);
         }
 
     }

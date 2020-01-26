@@ -1,9 +1,6 @@
 package sample.list;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
 
 
 public class ListOfTasks {
@@ -11,20 +8,29 @@ public class ListOfTasks {
     private String name;
     private File file;
     private PrintWriter printWriter;
+    private boolean append;
 
 
-    public ListOfTasks(String name, File file, PrintWriter printWriter) {
+    public ListOfTasks(String name, File file, boolean append ) {
         this.name = name;
         this.file = file;
-        this.printWriter = printWriter;
-
+        this.append = append;
     }
 
     public String getName() {
         return name;
     }
 
-    public PrintWriter getPrintWriter() {
+    public PrintWriter getOpenPrintWriter() {
+        try {
+            if(!append) {
+                this.printWriter = new PrintWriter(file);
+            } else {
+                this.printWriter = new PrintWriter( new FileWriter(file, true));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return printWriter;
     }
 

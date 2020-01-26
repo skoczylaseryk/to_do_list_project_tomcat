@@ -30,12 +30,9 @@ public class SaveTasksServlet extends HttpServlet {
         List<String> listOfAllTasks = Arrays.asList(allTasks.split(";"));
 
 
-
         listOfAllTasks = listOfAllTasks.stream()
                 .filter(e -> !Objects.equals(e, ""))
                 .collect(Collectors.toList());
-
-
 
 
         lm.writeWholeListToTxtFile(listOfAllTasks, new PrintWriter(new FileWriter("C:\\resources\\lists\\" + login + "\\" + nameOfList + ".txt")));

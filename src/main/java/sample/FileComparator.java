@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.util.Comparator;
 
 public class FileComparator implements Comparator<File> {
@@ -12,8 +11,8 @@ public class FileComparator implements Comparator<File> {
 
     @Override
     public int compare(File f1, File f2) {
-            long firstTime = getFileCreationEpoch(f1);
-            long secondTime = getFileCreationEpoch(f2);
+        long firstTime = getFileCreationEpoch(f1);
+        long secondTime = getFileCreationEpoch(f2);
 
 
         return Long.valueOf(firstTime).compareTo(secondTime);
@@ -27,7 +26,7 @@ public class FileComparator implements Comparator<File> {
             e.printStackTrace();
         }
 
-        return  basicFileAttributes.creationTime().toInstant().toEpochMilli();
+        return basicFileAttributes.creationTime().toInstant().toEpochMilli();
 
     }
 }

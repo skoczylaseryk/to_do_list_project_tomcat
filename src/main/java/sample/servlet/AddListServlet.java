@@ -22,7 +22,7 @@ public class AddListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String newTaskListName = request.getParameter("newTaskListName");
         String login = request.getParameter("login");
-        numberOfFile = fileService.getLastNumberOfFile(request,login);
+        numberOfFile = fileService.getLastNumberOfFile(request, login);
 
         if (newTaskListName.equals("")) {
             defaultName = defaultName + numberOfFile;

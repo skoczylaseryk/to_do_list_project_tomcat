@@ -19,11 +19,11 @@ public interface ListManager {
 
     void editNameOfList(String login, ListOfTasks listOfTasks, String newNameOfList) throws IOException;
 
-    ListOfTasks findList(String inputNameOfList,String login) throws IOException;
+    ListOfTasks findList(String inputNameOfList, String login) throws IOException;
 
     List<String> getTasks(ListOfTasks listOfTasks) throws IOException;
 
-     void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
+    void writeWholeListToTxtFile(List mainList, PrintWriter printWriter);
 
 
 }

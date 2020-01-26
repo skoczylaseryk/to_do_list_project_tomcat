@@ -14,26 +14,25 @@ public class FileServiceImpl implements FileService {
 
 
     private UserService userService = UserServiceImpl.getInstance();
-    private int numberOfFile=0;
+    private int numberOfFile = 0;
 
     private FileServiceImpl() {
     }
 
 
-    public static FileServiceImpl getInstance(){
-        if(FILESERVICE==null) {
+    public static FileServiceImpl getInstance() {
+        if (FILESERVICE == null) {
             FILESERVICE = new FileServiceImpl();
             return FILESERVICE;
         }
-         return FILESERVICE;
+        return FILESERVICE;
     }
 
 
     public int getLastNumberOfFile(HttpServletRequest request, String login) throws FileNotFoundException {
-         List<String> strings = new ArrayList<>();
+        List<String> strings = new ArrayList<>();
 
         File[] files = new File(userService.getCONTEXTPATH() + "/lists/" + login).listFiles();
-
 
 
         for (int i = 0; i < files.length; i++) {
@@ -50,7 +49,7 @@ public class FileServiceImpl implements FileService {
             }
         }
 
-        request.setAttribute("newListNumber",numberOfFile+1);
+        request.setAttribute("newListNumber", numberOfFile + 1);
 
         return numberOfFile;
     }

@@ -5,5 +5,5 @@ import java.io.FileNotFoundException;
 
 public interface FileService {
 
-    int getLastNumberOfFile(HttpServletRequest httpServletRequest, String login)  throws FileNotFoundException;
+    int getLastNumberOfFile(HttpServletRequest httpServletRequest, String login) throws FileNotFoundException;
 }

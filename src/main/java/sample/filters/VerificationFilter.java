@@ -32,23 +32,21 @@ public class VerificationFilter implements Filter {
         String password;
 
 
-
-        if(session.getAttribute("user") != null ) {
-            User user =(User)session.getAttribute("user");
-             login = user.getLogin();
-             password =user.getPassword();
-        }else{
+        if (session.getAttribute("user") != null) {
+            User user = (User) session.getAttribute("user");
+            login = user.getLogin();
+            password = user.getPassword();
+        } else {
             login = request.getParameter("login");
             password = request.getParameter("password");
         }
 
 
-        if (userService.verifyLoginData(login, password)){
-            filterChain.doFilter(servletRequest,servletResponse);
-        } else{
-            request.setAttribute("wrongCredentials","true");
-            System.out.println(request.getAttribute("wrongCredentials"));
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+        if (userService.verifyLoginData(login, password)) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            request.setAttribute("wrongCredentials", "true");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

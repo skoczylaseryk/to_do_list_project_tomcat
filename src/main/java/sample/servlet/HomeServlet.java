@@ -1,8 +1,6 @@
 package sample.servlet;
 
 
-
-
 import sample.services.FileService;
 import sample.services.impl.FileServiceImpl;
 import sample.user.User;
@@ -35,11 +33,11 @@ public class HomeServlet extends HttpServlet {
             session.setMaxInactiveInterval(3600);
 
         }
-        int newListNumber= fileService.getLastNumberOfFile(req,user.getLogin());
-        req.setAttribute("newListNumber",newListNumber);
+        int newListNumber = fileService.getLastNumberOfFile(req, user.getLogin());
+        req.setAttribute("newListNumber", newListNumber);
 
 
-        req.getRequestDispatcher("Lists.jsp").forward(req,resp);
+        req.getRequestDispatcher("Lists.jsp").forward(req, resp);
 
 
     }

@@ -1,7 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="sample.list.ListManager" %>
-<%@ page import="sample.list.impl.ListManagerImpl" %>
-<%@ page import="sample.list.ListOfTasks" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,7 +18,8 @@
     <% String nameOfList = request.getParameter("nameOfList");
         String login = request.getParameter("login");
         List<String> listOfTaskNames = (List<String>) request.getAttribute("listOfTasksNames");%>
-    <h1>List: <%=nameOfList%></h1>
+    <h1>List: <%=nameOfList%>
+    </h1>
 
     <form action="/LogOutServlet" method="post">
         <h2><%=login%>

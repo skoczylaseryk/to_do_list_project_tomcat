@@ -3,8 +3,7 @@ package sample.servlet;
 import sample.list.ListManager;
 import sample.list.ListOfTasks;
 import sample.list.impl.ListManagerImpl;
-import sample.services.UserService;
-import sample.services.impl.UserServiceImpl;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/ListOfTasksServlet")

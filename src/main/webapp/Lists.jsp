@@ -1,19 +1,8 @@
-<%@ page import="java.io.IOException" %>
-<%@ page import="java.io.FileWriter" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="sample.list.ListOfTasks" %>
 <%@ page import="java.io.File" %>
 <%@ page import="sample.user.User" %>
 <%@ page import="sample.services.impl.UserServiceImpl" %>
-<%@ page import="java.nio.file.attribute.BasicFileAttributes" %>
-<%@ page import="java.nio.file.Files" %>
-<%@ page import="java.nio.file.Paths" %>
-<%@ page import="java.nio.file.attribute.FileTime" %>
-<%@ page import="com.google.common.collect.Lists" %>
 <%@ page import="java.util.*" %>
 <%@ page import="sample.FileComparator" %>
-<%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -58,7 +47,6 @@
 
         File[] files = new File(userServiceImpl.getCONTEXTPATH() + "/lists/" + login).listFiles();
         Arrays.sort(files, new FileComparator());
-        System.out.println("Lists.jsp array: " + Arrays.toString(files));
 
     %>
     <form action=/ListOfTasksServlet method="post">
@@ -67,7 +55,6 @@
 
 
                 String fileName = files[i].getName();
-                System.out.println(fileName);
                 String name = fileName.substring(0, fileName.length() - 4);
 
         %>
