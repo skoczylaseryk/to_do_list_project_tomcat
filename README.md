@@ -50,3 +50,9 @@ tylko na ten moment chcemy dopiąć wszystko na ostatni guzik. Projekt staraliś
 
    Reasumując, jest to mała aplikacja webowa pozwalająca rozplanować nam jakieś czynności np. trening na siłowni czy listę zakupów.
 Technologie które użyliśmy to przedewszystkim: Java 8 (Intellij IDEA wraz z plikiem pom.xml, plikami z rozszerzeniem .jsp), GIT wraz z plikiem gitIgnore, podstawy Front-endu(HTML, CSS, JavaScript), Apache Tomcat. 
+
+
+Jak uruchomić naszą aplikację:
+1. Sklonuj zawartość repozytorium na nasz komputer.
+2. Zaimportuj projekt do swojego środowiska programistycznego.
+3. Pobierz Apache Tomcat 9.0.27  lub nowszy i uruchom aplikację używając go.
