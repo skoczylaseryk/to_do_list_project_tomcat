@@ -18,7 +18,7 @@ public class FileComparator implements Comparator<File> {
         return Long.valueOf(firstTime).compareTo(secondTime);
     }
 
-    public Long getFileCreationEpoch(File file) {
+    private Long getFileCreationEpoch(File file) {
         BasicFileAttributes basicFileAttributes = null;
         try {
             basicFileAttributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
@@ -27,6 +27,5 @@ public class FileComparator implements Comparator<File> {
         }
 
         return basicFileAttributes.creationTime().toInstant().toEpochMilli();
-
     }
 }

@@ -6,7 +6,7 @@ import sample.services.UserService;
 import java.io.*;
 
 public class UserServiceImpl implements UserService {
-    private static String CONTEXTPATH = "C:\\resources";
+    private static String CONTEXTPATH = "C:" + File.separator + "resources";
 
     private static UserServiceImpl USERSERVICE;
 
@@ -24,17 +24,17 @@ public class UserServiceImpl implements UserService {
     public void createUser(String login, String password) throws IOException {
 
 
-        new File(CONTEXTPATH + "/users/" + login).mkdirs();
-        new File(CONTEXTPATH + "/lists/" + login).mkdirs();
+        new File(CONTEXTPATH + File.separator + "users" + File.separator + login).mkdirs();
+        new File(CONTEXTPATH + File.separator + "lists" + File.separator + login).mkdirs();
 
-        PrintWriter printWriter1 = new PrintWriter(new FileWriter(new File(CONTEXTPATH + "/users/" + login + "/" + login + ".txt")));
+        PrintWriter printWriter1 = new PrintWriter(new FileWriter(new File(CONTEXTPATH + File.separator + "users" + File.separator + login + File.separator + login + ".txt")));
         printWriter1.println(login);
         printWriter1.println(password);
         printWriter1.close();
     }
 
     public boolean verifyLoginData(String login, String password) throws IOException {
-        File file = new File(CONTEXTPATH + "/users/" + login + "/" + login + ".txt");
+        File file = new File(CONTEXTPATH + File.separator + "users" + File.separator + login + File.separator + login + ".txt");
         if (file.exists()) {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String loginLine;
@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public int verifySignUpData(String login,String password) {
+    public int verifySignUpData(String login, String password) {
         UserServiceImpl userServiceImpl = UserServiceImpl.getInstance();
-        for (File file : new File(userServiceImpl.getCONTEXTPATH() + "/users/").listFiles()) {
+        for (File file : new File(userServiceImpl.getCONTEXTPATH() + File.separator + "users" + File.separator).listFiles()) {
             String fileName = file.getName();
             if (fileName.equals(login)) {
                 return 0;
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
             if (!checkIllegalCharacters(login)) {
                 return 1;
             }
-            if(password.equals("")){
+            if (password.equals("")) {
                 return 3;
             }
         }

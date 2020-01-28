@@ -31,16 +31,16 @@ public class ListManagerImpl implements ListManager {
     public ListOfTasks createNewTaskList(String login, String nameOfList) throws FileNotFoundException {
         LOG.setLevel(Level.INFO);
         LOG.info("Starting method _createNewTaskList_");
-        File file1 = new File(userService.getCONTEXTPATH() + "/lists/" + login + "/");
+        File file1 = new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator);
 
         if (!file1.exists()) {
             LOG.info("Creating directory, which isn't exist");
-            new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").mkdirs();
+            new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator).mkdirs();
         }
         LOG.info("Creating file with _" + nameOfList + "_.txt name");
-        File file = new File(userService.getCONTEXTPATH() + File.separator + "lists/" + login + "/" + nameOfList + ".txt");
+        File file = new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator + nameOfList + ".txt");
         try {
-            if(file.exists()) {
+            if (file.exists()) {
                 file.delete();
             }
             file.createNewFile();
@@ -110,7 +110,7 @@ public class ListManagerImpl implements ListManager {
 
     @Override
     public ListOfTasks findList(String nameOfList, String login) throws IOException {
-        for (File file : new File(userService.getCONTEXTPATH() + "/lists/" + login + "/").listFiles()) {
+        for (File file : new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator).listFiles()) {
             String fileName = file.getName();
             fileName = fileName.substring(0, fileName.length() - 4);
             if (fileName.equals(nameOfList)) {
@@ -149,7 +149,7 @@ public class ListManagerImpl implements ListManager {
     private List<String> addToUpperList(BufferedReader bufferedReader, String task) throws IOException {
         List<String> upperSubList = new ArrayList<>();
         String currentLine = bufferedReader.readLine();
-        while (currentLine!= null && !currentLine.equals(task)) {
+        while (currentLine != null && !currentLine.equals(task)) {
             upperSubList.add(currentLine);
             currentLine = bufferedReader.readLine();
         }

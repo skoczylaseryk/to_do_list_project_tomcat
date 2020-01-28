@@ -32,7 +32,7 @@ public class FileServiceImpl implements FileService {
     public int getLastNumberOfFile(HttpServletRequest request, String login) throws FileNotFoundException {
         List<String> strings = new ArrayList<>();
 
-        File[] files = new File(userService.getCONTEXTPATH() + "/lists/" + login).listFiles();
+        File[] files = new File(userService.getCONTEXTPATH() + File.separator+"lists"+ File.separator + login).listFiles();
 
 
         for (int i = 0; i < files.length; i++) {
