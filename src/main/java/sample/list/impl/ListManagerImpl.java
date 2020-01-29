@@ -7,6 +7,11 @@ import sample.services.UserService;
 import sample.services.impl.UserServiceImpl;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,8 +42,9 @@ public class ListManagerImpl implements ListManager {
             LOG.info("Creating directory, which isn't exist");
             new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator).mkdirs();
         }
-        LOG.info("Creating file with _" + nameOfList + "_.txt name");
+        LOG.info("Creating file with _" + nameOfList + ".txt_ name");
         File file = new File(userService.getCONTEXTPATH() + File.separator + "lists" + File.separator + login + File.separator + nameOfList + ".txt");
+
         try {
             if (file.exists()) {
                 file.delete();
@@ -47,6 +53,14 @@ public class ListManagerImpl implements ListManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //Set creation time of file, cease Windows sets old previous creation time of file with same name
+        try {
+            Files.setAttribute(file.toPath(), "creationTime", FileTime.fromMillis(System.currentTimeMillis()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         LOG.info("File _" + nameOfList + "_ has been created");
         ListOfTasks list = new ListOfTasks(nameOfList, file, false);
         return list;
