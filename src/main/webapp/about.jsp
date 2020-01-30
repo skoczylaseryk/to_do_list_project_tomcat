@@ -12,8 +12,7 @@
 <nav id="main-nav">
     <ul>
         <li><a href="about.jsp">About App</a></li>
-        <li><a href="logout.jsp">Logout</a></li>
-        <li><a href="contact.jsp">Contact</a></li>
+        <li><a href="contact">Contact</a></li>
     </ul>
 </nav>
 <body>

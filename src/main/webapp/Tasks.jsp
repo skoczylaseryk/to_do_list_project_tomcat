@@ -22,23 +22,17 @@
         <h6><%=login%></h6>
         <li><a href="about.jsp">About App</a></li>
         <li><a href="contact.jsp">Contact</a></li>
+
         <li id="nickLogout"> <form action="/LogOutServlet" method="post">
 
             <input type="submit" id="Logout" name="Logout" value="Log out">
 
-            <input type="hidden" name="logout" value="logout">
         </form></li>
 
     </ul>
 </nav>
 <div class="container">
 
-<%--    <form action="/LogOutServlet" method="post" id="logout">--%>
-<%--        <h2><%=login%>--%>
-<%--            <input type="submit" id="Logout" name="Logout" value="Log out"></h2>--%>
-<%--        <input type="hidden" name="logout" value="logout">--%>
-<%--        </h2>--%>
-<%--    </form>--%>
     <div id="nameOfLists">
         <h1>List: <%=nameOfList%>
             <h1/>
