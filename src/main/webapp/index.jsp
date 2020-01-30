@@ -20,7 +20,7 @@
     <%if (request.getAttribute("wrongCredentials") == "true") { %>
     <h5 id="incLogOrPass">Incorrect login or password</h5>
     <%
-    } else if (request.getAttribute("logout") == null) {                                      //TODO It works but this if is not proffesional
+    } else if (request.getAttribute("logout") == null) {
     } else {
     %>
     <h5 id="incLogOrPass">You have been logged out</h5>
