@@ -40,6 +40,9 @@
             <p>tel: 000 00 00 00 <br>
                 e-mail: <a href="mailto:sample@gmail.com">sample@gmail.com</a>
             </p>
+            <p>https://www.linkedin.com/in/eryk-skoczylas-796533194/ <br>
+                https://www.linkedin.com/in/alex-shostak-46a396115/
+            </p>
         </address>
         <div class="contact-social">
             <a href=""><i class="fab fa-facebook-f"></i></a>
