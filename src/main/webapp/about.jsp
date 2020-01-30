@@ -12,7 +12,7 @@
 <nav id="main-nav">
     <ul>
         <li><a href="about.jsp">About App</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li><a href="contact.jsp">Contact</a></li>
 
         <%if(session!= null && session.getAttribute("user") !=null){%>
         <li id="nickLogout">
