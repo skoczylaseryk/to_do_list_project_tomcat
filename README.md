@@ -56,3 +56,7 @@ Jak uruchomić naszą aplikację:
 1. Sklonuj zawartość repozytorium na nasz komputer.
 2. Zaimportuj projekt do swojego środowiska programistycznego.
 3. Pobierz Apache Tomcat 9.0.27  lub nowszy i uruchom aplikację używając go.
+
+<img src="https://i.ibb.co/jWbs9bp/60874300-2040272576266467-1734915510522347520-n.jpg" alt="60874300-2040272576266467-1734915510522347520-n" border="0">
+
+https://i.ibb.co/jWbs9bp/60874300-2040272576266467-1734915510522347520-n.jpg
