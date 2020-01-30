@@ -16,19 +16,29 @@
     <ul>
         <li><a href="about.jsp">About App</a></li>
         <li><a href="contact.jsp">Contact</a></li>
+        <%if(session!= null && session.getAttribute("user") !=null){%>
+        <li id="nickLogout">
+
+            <form action="/LogOutServlet" method="post">
+
+                <input type="submit" id="Logout" name="Logout" value="Log out">
+
+            </form></li>
+        <%}%>
     </ul>
+
 </nav>
 <!--Contact-->
 <section id="contact">
     <h2 class="section-header">Eryk <span>Skoczylas</span></h2>
-    <h2 class="section-header">Alex <span>Szostak</span></h2>
+    <h2 class="section-header">Alex <span>Shostak</span></h2>
     <div class="contact-data">
         <address>
             <p>ul. Aleja Zygmunta Krasińskiego 10/4 <br>
                 31-061 Kraków
             </p>
-            <p>tel: 606 74 57 59 <br>
-                e-mail: <a href="mailto:qbaq97@gmail.com">qbaq97@gmail.com</a>
+            <p>tel: 000 00 00 00 <br>
+                e-mail: <a href="mailto:sample@gmail.com">sample@gmail.com</a>
             </p>
         </address>
         <div class="contact-social">
@@ -46,7 +56,7 @@
     </form>
 </section>
 <footer id="footer">
-    <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+    <p>Copyright &copy; Eryk&Alex</p>
 </footer>
 </body>
 </html>

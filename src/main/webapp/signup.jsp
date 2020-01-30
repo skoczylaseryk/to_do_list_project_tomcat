@@ -40,7 +40,8 @@
     </form>
     </div>
     <footer id="footer">
-        <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+        <p>Copyright &copy; Eryk&Alex</p>
+
     </footer>
     </body>
     </html>

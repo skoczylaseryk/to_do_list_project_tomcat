@@ -52,7 +52,6 @@
             <%
         for (int i = 0; i < files.length; i++) {
             String fileName = files[i].getName();
-            System.out.println(fileName);
             String name = fileName.substring(0, fileName.length() - 4);
     %>
         <table>
@@ -70,7 +69,8 @@
             <%}%>
         </div>
         <footer id="footer">
-            <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+            <p>Copyright &copy; Eryk&Alex</p>
+
         </footer>
         </body>
         </html>

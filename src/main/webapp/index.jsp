@@ -17,14 +17,18 @@
 </nav>
 <div class="container">
     <h2>Input login and password</h2>
-        <%if (request.getAttribute("wrongCredentials") == "true") { %>
+    <%if (request.getAttribute("wrongCredentials") == "true") { %>
     <h5 id="incLogOrPass">Incorrect login or password</h5>
-        <%
-    } else if (request.getAttribute("logout") == null) {
+    <%
+    } else if (request.getAttribute("logout") == null) {                                      //TODO It works but this if is not proffesional
     } else {
     %>
     <h5 id="incLogOrPass">You have been logged out</h5>
-        <%}%>
+    <%}%>
+    <% if (request.getAttribute("isLogin") == "noLogin") {%>
+    <h5 id="incLogOrPass">Please, log in</h5>
+    <%}%>
+
     <form action="/HomeServlet" method="post">
         <input type="text" id="login" name="login" placeholder="Login"><br>
         <input type="password" id="password" name="password" placeholder="Password"><br>
@@ -36,7 +40,8 @@
     </form>
     </div>
     <footer id="footer">
-        <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+        <p>Copyright &copy; Eryk&Alex</p>
+
     </footer>
     </body>
     </html>

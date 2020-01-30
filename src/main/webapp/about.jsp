@@ -13,6 +13,16 @@
     <ul>
         <li><a href="about.jsp">About App</a></li>
         <li><a href="contact">Contact</a></li>
+
+        <%if(session!= null && session.getAttribute("user") !=null){%>
+        <li id="nickLogout">
+
+            <form action="/LogOutServlet" method="post">
+
+                <input type="submit" id="Logout" name="Logout" value="Log out">
+
+            </form></li>
+        <%}%>
     </ul>
 </nav>
 <body>
@@ -33,7 +43,7 @@
     </div>
 </div>
 <footer id="footer">
-    <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+    <p>Copyright &copy; Eryk&Alex</p>
 </footer>
 </body>
 </html>

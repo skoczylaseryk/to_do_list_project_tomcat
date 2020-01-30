@@ -23,7 +23,9 @@
         <li><a href="about.jsp">About App</a></li>
         <li><a href="contact.jsp">Contact</a></li>
 
-        <li id="nickLogout"> <form action="/LogOutServlet" method="post">
+        <li id="nickLogout">
+
+            <form action="/LogOutServlet" method="post">
 
             <input type="submit" id="Logout" name="Logout" value="Log out">
 
@@ -86,7 +88,7 @@
             </div>
 
             <footer id="footer">
-                <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+                <p>Copyright &copy; Eryk&Alex</p>
             </footer>
             </body>
             </html>
