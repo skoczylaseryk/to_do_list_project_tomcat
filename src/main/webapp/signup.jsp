@@ -10,37 +10,38 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>signup.jsp</title>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<nav id="main-nav">
+    <ul>
+        <li><a href="about.jsp">About App</a></li>
+        <li><a href="logout.jsp">Logout</a></li>
+        <li><a href="contact.jsp">Contact</a></li>
+    </ul>
+</nav>
 <div class="container">
-
     <h2 id="header">Input login and password</h2>
-    <% if (request.getAttribute("verifyResult") == "0") { %>
+        <% if (request.getAttribute("verifyResult") == "0") { %>
     <h5 id="incLogOrPass">This login is already use</h5>
-    <%} else if (request.getAttribute("verifyResult") == "1") {%>
+        <%} else if (request.getAttribute("verifyResult") == "1") {%>
     <h5 id="incLogOrPass">You cannot use special characters
         like:!,@,#,$,%,^,&,*,(,),?,:,;,',",>,<,",",".",{,},[,],\,|,/</h5>
-    <%} else if (request.getAttribute("verifyResult")== "3"){%>
+        <%} else if (request.getAttribute("verifyResult")== "3"){%>
     <h5 id="incLogOrPass">Password cannot be empty</h5>
-    <%}%>
-
-
-
+        <%}%>
     <form action="SignUpServlet">
         <input type="text" id="signuplogin" name="login" placeholder="login"><br>
         <input type="password" id="signuppassword" name="password" placeholder="password"><br>
         <input type="submit" name="sign up" value="sign up">
-
     </form>
-</div>
-
-</body>
-</html>
+    </div>
+    <footer id="footer">
+        <p>Copyright &copy; ErykAlexKubuśTEAM</p>
+    </footer>
+    </body>
+    </html>

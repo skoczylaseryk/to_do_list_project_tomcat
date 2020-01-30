@@ -1,8 +1,11 @@
 package sample.servlet;
 
 
+import sample.FileComparator;
 import sample.services.FileService;
+import sample.services.UserService;
 import sample.services.impl.FileServiceImpl;
+import sample.services.impl.UserServiceImpl;
 import sample.user.User;
 
 import javax.servlet.ServletException;
@@ -11,12 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
     FileService fileService = FileServiceImpl.getInstance();
-
+    UserService userServiceImpl = UserServiceImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
