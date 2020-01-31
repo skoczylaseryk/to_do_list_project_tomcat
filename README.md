@@ -60,6 +60,7 @@ Jak uruchomić naszą aplikację:
 3. Pobierz Apache Tomcat 9.0.27  lub nowszy i uruchom aplikację używając go.
 
 https://www.linkedin.com/in/eryk-skoczylas-796533194/
+
 https://www.linkedin.com/in/alex-shostak-46a396115/
 
 
