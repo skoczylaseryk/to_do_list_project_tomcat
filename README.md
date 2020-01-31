@@ -64,5 +64,5 @@ https://www.linkedin.com/in/eryk-skoczylas-796533194/
 https://www.linkedin.com/in/alex-shostak-46a396115/
 
 
-PS: We at the start of Java courses :)
+PS: We are at the beggining of Java courses :)
 <img src="https://i.ibb.co/jWbs9bp/60874300-2040272576266467-1734915510522347520-n.jpg" alt="60874300-2040272576266467-1734915510522347520-n" border="0">
