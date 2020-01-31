@@ -1,5 +1,7 @@
 # to_do_project_list_tomcat
 
+Download and run Operation of App.mp4 to see our app.
+
 Operation of our application:
         
    Using Apache Tomcat and servlets the application runs in the browser, where we can see a standard window with the option of log in or registration.
@@ -56,6 +58,9 @@ Jak uruchomić naszą aplikację:
 1. Sklonuj zawartość repozytorium na nasz komputer.
 2. Zaimportuj projekt do swojego środowiska programistycznego.
 3. Pobierz Apache Tomcat 9.0.27  lub nowszy i uruchom aplikację używając go.
+
+https://www.linkedin.com/in/eryk-skoczylas-796533194/
+https://www.linkedin.com/in/alex-shostak-46a396115/
 
 
 PS: We at the start of Java courses :)
